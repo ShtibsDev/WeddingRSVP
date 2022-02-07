@@ -8,50 +8,56 @@ import MainContent from './components/MainContent';
 import weCute from './Images/WeCute.jpeg'
 
 const defaultInvitee: Invitee = {
-    firstName: 'ג\'וטרו',
-    lastName: 'קוג\'ו',
-    isBringsPlusOne: false,
-    isFinal: false,
-    isGroup: false,
-    isMale: true,
-    lang: 'he',
-    phoneNumber: '0500000000'
+  firstName: '',
+  lastName: '',
+  isBringsPlusOne: false,
+  isFinal: false,
+  isGroup: false,
+  isMale: true,
+  lang: 'he',
+  phoneNumber: ''
 }
 
 function App() {
-    const { t, i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
 
-    const [invitee, setInvitee] = useState(defaultInvitee)
+  const [invitee, setInvitee] = useState<Invitee>(defaultInvitee)
 
-    useEffect(() => {
-        async function getInvitee() {
-            const phoneNumber = getPhoneNumber();
-            if (phoneNumber !== null)
-                setInvitee(await Api.getInvitee(phoneNumber))
-            i18n.changeLanguage(invitee.lang)
-            const html = document.querySelector('html')
-            if (html) {
-                html.lang = invitee.lang
-            }
-            document.title = t('RSVPs')
-        }
-        getInvitee()
-    }, [])
+  useEffect(() => {
+    getInvitee()
+  }, [])
 
-    return (
-        <div className="App" dir={invitee.lang === 'he' ? 'rtl' : 'ltr'}>
-            <header>
-                <CustomHeader />
-            </header>
-            <main>
-                <MainContent invitee={invitee} />
-                <img className='we-cute' src={weCute} alt="Two cute people that are getting married" />
-            </main>
-            <footer className="m-4">
-                Ofir Stiber&copy; 2022
-            </footer>
-        </div>
-    );
+  useEffect(() => console.log('Invitee has changed: ', invitee), [invitee])
+
+  async function getInvitee() {
+    const phoneNumber = getPhoneNumber();
+    if (phoneNumber !== null) {
+      const data = await Api.getInvitee(phoneNumber)
+      if (data)
+        setInvitee(data)
+    }
+    i18n.changeLanguage(invitee.lang)
+    const html = document.querySelector('html')
+    if (html) {
+      html.lang = invitee.lang
+    }
+    document.title = t('RSVPs')
+  }
+
+  return (
+    <div className="App" dir={invitee.lang === 'he' ? 'rtl' : 'ltr'}>
+      <header>
+        <CustomHeader />
+      </header>
+      <main>
+        <MainContent invitee={invitee} setInvitee={setInvitee} />
+        <img className='we-cute' src={weCute} alt="Two cute people that are getting married" />
+      </main>
+      <footer className="m-4">
+        Ofir Stiber&copy; 2022
+      </footer>
+    </div>
+  );
 }
 
 export default App;

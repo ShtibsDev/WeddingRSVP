@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import Invitee from "../models/Invitee";
 import SingleForm from "./SingleForm";
 
-export default function MainContent(props: { className?: string, invitee: Invitee }) {
+export default function MainContent(props: { className?: string, invitee: Invitee, setInvitee: (invitee: Invitee) => void  }) {
   const { t } = useTranslation()
 
   return (
@@ -19,7 +19,7 @@ export default function MainContent(props: { className?: string, invitee: Invite
         <a href="Invitation.pdf" className="">
           {t('invitationLink')}
         </a>
-        <SingleForm invitee={props.invitee} className="col" />
+        <SingleForm invitee={props.invitee} className="col" setInvitee={props.setInvitee} />
       </div>
     </div>
   )
