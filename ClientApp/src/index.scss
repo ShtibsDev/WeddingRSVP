@@ -14,7 +14,13 @@ body,
 }
 
 body {
-  background: $bg-color;
+  // background: $bg-color;
+  background-image: url('./Images/Background-Mobile.jpg');
+  background-size: contain;
+
+  @media only screen and (min-width: 992px) {
+    background-image: url('./Images/Background-Desktop.jpg');
+  }
 }
 
 h1 {
