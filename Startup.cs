@@ -6,14 +6,20 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Serilog;
+using WeddingArrival.Data.Services;
+using WeddingArrival.Models;
 
 namespace WeddingArrival
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
         }
 
         public IConfiguration Configuration { get; }
@@ -23,6 +29,8 @@ namespace WeddingArrival
         {
             services.AddControllersWithViews();
 
+            services.Configure<DatabaseSettings>(Configuration.GetSection("WeddingArrivalsDB"));
+            services.AddSingleton<IInviteeService, InviteeService>();
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -33,6 +41,7 @@ namespace WeddingArrival
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            Log.Information("Application Environment: {env}", env.EnvironmentName);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -48,7 +57,7 @@ namespace WeddingArrival
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseWebSockets();
-
+            
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
