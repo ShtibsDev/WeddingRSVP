@@ -1,17 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WeddingArrival.Data.Services
 {
     public interface IInviteeService
     {
         public Task<Invitee> GetInvitee(string phoneNumber);
+        public Task<List<Invitee>> GetAllInvitees();
     }
     public class InviteeService : IInviteeService
     {
@@ -32,6 +28,16 @@ namespace WeddingArrival.Data.Services
         public async Task<Invitee> GetInvitee(string phoneNumber)
         {
             return await _inviteeCollection.Find(i => i.PhoneNumber == phoneNumber).FirstOrDefaultAsync();
+        }
+
+        public async Task<List<Invitee>> GetAllInvitees()
+        {
+            return await _inviteeCollection.Find(_ => true).ToListAsync();
+        }
+
+        public async Task SubmitRsvp(Invitee invitee)
+        {
+            await _inviteeCollection.FindOneAndReplaceAsync(i => i.Id == invitee.Id, invitee);
         }
     }
 }
