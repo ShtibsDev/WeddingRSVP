@@ -1,0 +1,33 @@
+{
+  "RSVPs":"אישורי הגעה",
+  "hey":"היי",
+  "names":{
+    "ofir":"Ofir",
+    "ellie":"Ellie"
+  },
+  "weddingGettingClose":"החתונה שלנו מתקרבת",
+  "onFriday":"ביום שישי",
+  "invitationLink":"להזמנה לחתונה",
+  "iAm":"אני",
+  "finish":"סיום",
+  "m":{
+    "pleaseChoose":"תבחר בבקשה",
+    "bringPlusOne":"אתה מביא +1",
+    "options":{
+      "arriving":"מגיע",
+      "stayingTheNight":"מגיע ונשאר ללילה",
+      "notSure":"עוד לא יודע",
+      "notComing":"לא מגיע"
+    }
+  },
+  "f":{
+    "pleaseChoose":"תבחרי בבקשה",
+    "bringPlusOne":"את מביאה +1",
+    "options":{
+      "arriving":"מגיעה",
+      "stayingTheNight":"מגיעה ונשארת ללילה",
+      "notSure":"עוד לא יודעת",
+      "notComing":"לא מגיעה"
+    }
+  }
+}
