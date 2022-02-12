@@ -1,0 +1,2 @@
+2022-02-12 03:11:22.397 +02:00 [INF] Starting Web Host
+2022-02-12 03:11:22.752 +02:00 [INF] Application Environment: Development
