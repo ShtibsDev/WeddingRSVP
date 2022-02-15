@@ -2,11 +2,19 @@ $header-height: 5rem;
 $footer-height: 4rem;
 $bg-color: #f2ecde;
 
+@font-face {
+  font-family: dorian;
+  src: url('./Fonts/dorian/dorianclm-book-webfont.woff');
+}
+
 html,
 body,
 #root,
 .App {
   height: 100%;
+  font-family: 'dorian';
+
+
 }
 
 .App {
@@ -25,6 +33,7 @@ body {
 
 h1 {
   font-style: italic;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .rtl {
