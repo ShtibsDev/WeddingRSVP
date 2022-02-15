@@ -27,7 +27,6 @@ function App() {
 
   useEffect(() => {
     getInvitee()
-
   }, [])
 
   async function getInvitee() {
@@ -44,13 +43,16 @@ function App() {
       if (data)
         setInvitee(data)
     }
+  }
+
+  useEffect(() => {
     i18n.changeLanguage(invitee.lang)
     const html = document.querySelector('html')
     if (html) {
       html.lang = invitee.lang
     }
     document.title = t('RSVPs')
-  }
+  }, [invitee])
 
   return (
     <div className="App" dir={invitee.lang === 'he' ? 'rtl' : 'ltr'}>
