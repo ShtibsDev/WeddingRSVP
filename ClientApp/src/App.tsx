@@ -6,6 +6,7 @@ import { getPhoneNumber } from './utils';
 import * as Api from './services/api'
 import MainContent from './components/MainContent';
 import weCute from './Images/WeCute.jpeg'
+import ErrorPage from './components/Pages/ErrorPage';
 
 const defaultInvitee: Invitee = {
   firstName: '',
@@ -22,15 +23,22 @@ function App() {
   const { t, i18n } = useTranslation()
 
   const [invitee, setInvitee] = useState<Invitee>(defaultInvitee)
+  const [hasError, setHasError] = useState(false)
 
   useEffect(() => {
     getInvitee()
+
   }, [])
 
-  useEffect(() => console.log('Invitee has changed: ', invitee), [invitee])
-
   async function getInvitee() {
-    const phoneNumber = getPhoneNumber();
+    let phoneNumber = ''
+    try {
+      phoneNumber = getPhoneNumber();
+    }
+    catch {
+      setHasError(true)
+      return
+    }
     if (phoneNumber !== null) {
       const data = await Api.getInvitee(phoneNumber)
       if (data)
@@ -49,10 +57,12 @@ function App() {
       <header>
         <CustomHeader />
       </header>
-      <main>
-        <MainContent invitee={invitee} setInvitee={setInvitee} />
-        <img className='we-cute' src={weCute} alt="Two cute people that are getting married" />
-      </main>
+      {hasError ? <ErrorPage /> :
+        <main>
+          <MainContent invitee={invitee} setInvitee={setInvitee} />
+          <img className='we-cute' src={weCute} alt="Two cute people that are getting married" />
+        </main>
+      }
       <footer className="m-4">
         Ofir Stiber&copy; 2022
       </footer>

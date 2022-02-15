@@ -1,0 +1,4 @@
+2022-02-16 00:04:06.949 +02:00 [INF] Starting Web Host
+2022-02-16 00:04:07.323 +02:00 [INF] Application Environment: Development
+2022-02-16 00:04:13.972 +02:00 [INF] Request arrived with the phone number: 0500000000
+2022-02-16 00:05:09.793 +02:00 [INF] Request arrived with the phone number: 0500000000

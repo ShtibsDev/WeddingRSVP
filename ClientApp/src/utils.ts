@@ -1,7 +1,10 @@
 
 export function getPhoneNumber() {
   const url = new URL(window.location.href);
-  return url.searchParams.get('t')
+  const phoneNumber =  url.searchParams.get('t')
+  if(!phoneNumber)
+    throw Error('URL is invalid.')
+  return phoneNumber
 }
 
 export function classNames(classes: object) {
