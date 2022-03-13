@@ -1,11 +1,8 @@
-﻿namespace WeddingArrival.Models
+﻿namespace WeddingArrival.Models;
+
+public class DatabaseSettings
 {
-    public class DatabaseSettings
-    {
-        public string ConnectionString { get; set; } = null!;
-
-        public string DatabaseName { get; set; } = null!;
-
-        public string InviteesCollectionName { get; set; } = null!;
-    }
+    public string ConnectionString { get; set; } = null!;
+    public string DatabaseName { get; set; } = null!;
+    public string InviteesCollectionName { get; set; } = null!;
 }

@@ -1,33 +1,24 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React, { createContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import CustomHeader from './components/CustomHeader';
 import Invitee from './models/Invitee';
 import { getPhoneNumber } from './utils';
 import * as Api from './services/api'
 import MainContent from './components/MainContent';
-import weCute from './Images/WeCute.jpeg'
+import SaveTheDate from './Images/SaveTheDate.jpeg'
 import ErrorPage from './components/Pages/ErrorPage';
+import InviteeContext, { defaultInvitee } from './context/InviteeContext';
 
-const defaultInvitee: Invitee = {
-  firstName: '',
-  lastName: '',
-  isBringsPlusOne: false,
-  isFinal: false,
-  isGroup: false,
-  isMale: true,
-  lang: 'he',
-  phoneNumber: ''
-}
+export const [contentDislay, setContentDisplay] = useState(<MainContent />)
 
 function App() {
   const { t, i18n } = useTranslation()
 
-  const [invitee, setInvitee] = useState<Invitee>(defaultInvitee)
+  const [invitee, setInvitee] = useState(defaultInvitee)
   const [hasError, setHasError] = useState(false)
+  const value = useMemo(() => ({ invitee, setInvitee }), [invitee])
 
-  useEffect(() => {
-    getInvitee()
-  }, [])
+  useEffect(() => { getInvitee() }, [])
 
   async function getInvitee() {
     let phoneNumber = ''
@@ -56,18 +47,20 @@ function App() {
 
   return (
     <div className="App" dir={invitee.lang === 'he' ? 'rtl' : 'ltr'}>
-      <header>
-        <CustomHeader />
-      </header>
-      {hasError ? <ErrorPage /> :
-        <main>
-          <MainContent invitee={invitee} setInvitee={setInvitee} />
-          <img className='we-cute' src={weCute} alt="Two cute people that are getting married" />
-        </main>
-      }
-      <footer className="m-4">
-        Ofir Stiber&copy; 2022
-      </footer>
+      <InviteeContext.Provider value={value}>
+        <header>
+          <CustomHeader />
+        </header>
+        {hasError ? <ErrorPage /> :
+          <main>
+            {contentDislay}
+            <img className='we-cute' src={SaveTheDate} alt="Two cute people that are getting married" />
+          </main>
+        }
+        <footer className="m-4 english">
+          <span style={{ fontStyle: 'italic' }}>Ofir Stiber</span>&copy; 2022
+        </footer>
+      </InviteeContext.Provider>
     </div>
   );
 }

@@ -13,8 +13,6 @@ body,
 .App {
   height: 100%;
   font-family: 'dorian';
-
-
 }
 
 .App {
@@ -31,9 +29,12 @@ body {
   }
 }
 
+.english {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
 h1 {
   font-style: italic;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .rtl {
@@ -129,4 +130,24 @@ h1 {
     width: 75%;
     margin: auto;
   }
+}
+
+@keyframes submit-insert {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  75% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.submit-btn {
+  animation: submit-insert .3s linear;
 }

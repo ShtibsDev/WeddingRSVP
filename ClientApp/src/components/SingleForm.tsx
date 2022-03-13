@@ -1,18 +1,20 @@
-import React, { FormEvent, useState } from "react"
+import React, { FormEvent, useContext, useState } from "react"
 import { useTranslation } from "react-i18next";
-import Invitee from "../models/Invitee";
 import { classNames } from "../utils";
 import * as Api from '../services/api'
+import InviteeContext from "../context/InviteeContext";
 
-export default function SingleForm(props: { className?: string, invitee: Invitee, setInvitee: (invitee: Invitee) => void }) {
+export default function SingleForm(props: { className?: string }) {
   const { t } = useTranslation()
-  const [disableCheck, seDisableCheck] = useState(false)
+  const { invitee, setInvitee } = useContext(InviteeContext)
+  const [disableCheck, setDisableCheck] = useState(false)
+  const [showSubmit, setShowSubmit] = useState(false)
 
   const classes = classNames({
     'form-select': true,
-    'rtl': props.invitee.lang === 'he'
+    'rtl': invitee.lang === 'he'
   })
-  const gender = props.invitee.isMale ? 'm' : 'f'
+  const gender = invitee.isMale ? 'm' : 'f'
   const options = [
     { value: 1, text: t(`${gender}.options.arriving`) },
     { value: 2, text: t(`${gender}.options.stayingTheNight`) },
@@ -20,34 +22,36 @@ export default function SingleForm(props: { className?: string, invitee: Invitee
     { value: 4, text: t(`${gender}.options.notComing`) }
   ]
 
-  function handleAnswer(e: FormEvent<HTMLSelectElement>){
+  function handleAnswer(e: FormEvent<HTMLSelectElement>) {
+    setShowSubmit(true)
+
     switch (e.currentTarget.value) {
       case "1":
-        props.setInvitee({...props.invitee, isArriving: true, isStayingForNight: false, isFinal: true})
-        seDisableCheck(false)
+        setInvitee({ ...invitee, isArriving: true, isStayingForNight: false, isFinal: true })
+        setDisableCheck(false)
         return
       case "2":
-        props.setInvitee({...props.invitee, isArriving: true, isStayingForNight: true, isFinal: true})
-        seDisableCheck(false)
+        setInvitee({ ...invitee, isArriving: true, isStayingForNight: true, isFinal: true })
+        setDisableCheck(false)
         return
-      case "3": 
-        seDisableCheck(false)
+      case "3":
+        setDisableCheck(false)
         return
       case "4":
-        props.setInvitee({...props.invitee, isArriving: false, isStayingForNight: false, isFinal: true})
-        seDisableCheck(true)
+        setInvitee({ ...invitee, isArriving: false, isStayingForNight: false, isFinal: true })
+        setDisableCheck(true)
         return
     }
   }
 
-  function handleCheck(e: FormEvent<HTMLInputElement>){
-    props.setInvitee({...props.invitee, isBringsPlusOne: e.currentTarget.checked})
+  function handleCheck(e: FormEvent<HTMLInputElement>) {
+    setInvitee({ ...invitee, isBringsPlusOne: e.currentTarget.checked })
   }
 
-  async function handleSubmit(e: FormEvent){
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
-    await Api.submitInvitee(props.invitee)
-  } 
+    await Api.submitInvitee(invitee)
+  }
 
   return (
     <div className={`single-form ${props.className} h-100`}>
@@ -69,8 +73,8 @@ export default function SingleForm(props: { className?: string, invitee: Invitee
             <label htmlFor="plusOne" className="m-1" >{t(`${gender}.bringPlusOne`)}?</label>
           </div>
         </div>
-        <div>
-          <button type="submit" className="btn btn-outline-dark">{t('finish')}</button>
+        <div style={{ height: 40 }}>
+          {showSubmit && <button type="submit" className="btn btn-outline-dark submit-btn">{t('finish')}</button>}
         </div>
       </form >
     </div >

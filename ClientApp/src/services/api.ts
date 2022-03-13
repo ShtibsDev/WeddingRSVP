@@ -12,8 +12,8 @@ export async function getInvitee(phoneNumber: string) {
 
 export async function submitInvitee(invitee: Invitee) {
   try {
-    const response = await axios.post(`/api/Invitees/SubmitInvitee`, invitee)
-    console.log(response)
+    const response = await axios.put(`/api/Invitees/SubmitInvitee`, invitee)
+
   } catch (error) {
     console.warn(error)
   }

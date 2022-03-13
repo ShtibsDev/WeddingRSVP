@@ -6,7 +6,7 @@ export default function CustomHeader() {
 
     return (
         <div className="custom-header">
-            <h1>
+            <h1 className="english">
                 {t('names.ellie')} &amp; {t('names.ofir')}
             </h1>
             <h2>❤</h2>
