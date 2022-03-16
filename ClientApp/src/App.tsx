@@ -1,29 +1,34 @@
-﻿import React, { createContext, useEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import CustomHeader from './components/CustomHeader';
-import Invitee from './models/Invitee';
-import { getPhoneNumber } from './utils';
+﻿import React, { createContext, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import CustomHeader from './components/CustomHeader'
+import Invitee from './models/Invitee'
+import { getPhoneNumber } from './utils'
 import * as Api from './services/api'
-import MainContent from './components/MainContent';
+import MainContent from './components/MainContent'
 import SaveTheDate from './Images/SaveTheDate.jpeg'
-import ErrorPage from './components/Pages/ErrorPage';
-import InviteeContext, { defaultInvitee } from './context/InviteeContext';
+import ErrorPage from './components/Pages/ErrorPage'
+import InviteeContext, { defaultInvitee } from './context/InviteeContext'
+import ResultPage from './components/Pages/ResultPage'
 
-export const [contentDislay, setContentDisplay] = useState(<MainContent />)
 
 function App() {
   const { t, i18n } = useTranslation()
 
   const [invitee, setInvitee] = useState(defaultInvitee)
   const [hasError, setHasError] = useState(false)
+  const [contentDislay, setContentDisplay] = useState(<MainContent goToResult={goToResult}/>)
   const value = useMemo(() => ({ invitee, setInvitee }), [invitee])
+
+  function goToResult() {
+    setContentDisplay(<ResultPage/>)
+  }
 
   useEffect(() => { getInvitee() }, [])
 
   async function getInvitee() {
     let phoneNumber = ''
     try {
-      phoneNumber = getPhoneNumber();
+      phoneNumber = getPhoneNumber()
     }
     catch {
       setHasError(true)
@@ -62,7 +67,7 @@ function App() {
         </footer>
       </InviteeContext.Provider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

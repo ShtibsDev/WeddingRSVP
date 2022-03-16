@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import InviteeContext from "../context/InviteeContext";
 import SingleForm from "./SingleForm";
 
-export default function MainContent(props: { className?: string }) {
+export default function MainContent(props: { goToResult?: () => void, className?: string }) {
   const { t } = useTranslation()
   const { invitee } = useContext(InviteeContext)
 
@@ -20,7 +20,7 @@ export default function MainContent(props: { className?: string }) {
         <a href="Invitation.pdf" className="">
           {t('invitationLink')}
         </a>
-        <SingleForm className="col" />
+        <SingleForm goToResult={props.goToResult} className="col" />
       </div>
     </div>
   )

@@ -1,10 +1,10 @@
 import React, { FormEvent, useContext, useState } from "react"
-import { useTranslation } from "react-i18next";
-import { classNames } from "../utils";
+import { useTranslation } from "react-i18next"
+import { classNames } from "../utils"
 import * as Api from '../services/api'
-import InviteeContext from "../context/InviteeContext";
+import InviteeContext from "../context/InviteeContext"
 
-export default function SingleForm(props: { className?: string }) {
+export default function SingleForm(props: { goToResult?: () => void, className?: string }) {
   const { t } = useTranslation()
   const { invitee, setInvitee } = useContext(InviteeContext)
   const [disableCheck, setDisableCheck] = useState(false)
@@ -51,6 +51,9 @@ export default function SingleForm(props: { className?: string }) {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     await Api.submitInvitee(invitee)
+    if (props.goToResult) {
+      props.goToResult()
+    }
   }
 
   return (
