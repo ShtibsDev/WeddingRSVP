@@ -21,7 +21,6 @@
     "cross-env": "^7.0.3",
     "eslint-plugin-html": "^6.2.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
-    "link-module-alias": "^1.2.0",
     "nan": "^2.14.1",
     "react-scripts": "^5.0.0",
     "sass": "^1.49.0",
@@ -32,13 +31,7 @@
     "build": "react-scripts build",
     "test": "cross-env CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src/**/*.ts ./src/**/*.tsx",
-    "postinstall": "link-module-alias"
-  },
-  "_moduleAliases": {
-    "@root" : ".",
-    "@public" : "./public",
-    "@src" : "./src"
+    "lint": "eslint ./src/**/*.ts ./src/**/*.tsx"
   },
   "eslintConfig": {
     "extends": "react-app"

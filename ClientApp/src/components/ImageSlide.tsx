@@ -1,4 +1,1 @@
-
-export default function ImageSlide (props: any){
-    
-}
+export default function ImageSlide(props: any) {}

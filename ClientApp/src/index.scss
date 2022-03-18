@@ -16,16 +16,34 @@ body,
 }
 
 .App {
-    text-align: center;
+  text-align: center;
 }
 
 body {
-  // background: $bg-color;
-  background-image: url('./Images/Background-Mobile.jpg');
-  background-size: contain;
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  z-index: 1;
 
-  @media only screen and (min-width: 992px) {
-    background-image: url('./Images/Background-Desktop.jpg');
+  ::before {
+    content: '';
+    background-image: url('./Images/WoodBackground.JPEG');
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.2;
+    z-index: -1;
+
+    @media only screen and (min-width: 769px) {
+      background-size: contain;
+    }
   }
 }
 
@@ -149,5 +167,5 @@ h1 {
 }
 
 .submit-btn {
-  animation: submit-insert .3s linear;
+  animation: submit-insert 0.3s linear;
 }

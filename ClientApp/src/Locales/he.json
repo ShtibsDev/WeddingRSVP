@@ -13,6 +13,7 @@
   "iAm": "אני",
   "finish": "סיום",
   "m": {
+    "canComeAgain": "אתה מוזמן לחזור ולענות  במועד אחר",
     "pleaseChoose": "תבחר בבקשה",
     "bringPlusOne": "אתה מביא +1",
     "options": {

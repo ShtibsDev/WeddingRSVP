@@ -1,5 +1,5 @@
-import Invitee from "@src/models/Invitee"
-import { createContext } from "react"
+import Invitee from '@src/models/Invitee'
+import { createContext } from 'react'
 
 export interface InviteeContextModel {
   invitee: Invitee
@@ -14,12 +14,12 @@ export const defaultInvitee: Invitee = {
   isGroup: false,
   isMale: true,
   lang: 'he',
-  phoneNumber: ''
+  phoneNumber: '',
 }
 
 const InviteeContext = createContext<InviteeContextModel>({
   invitee: defaultInvitee,
-  setInvitee: (invitee: Invitee) => { }
+  setInvitee: (invitee: Invitee) => {},
 })
 
 export default InviteeContext
