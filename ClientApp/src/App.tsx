@@ -1,13 +1,14 @@
 ﻿import React, { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import CustomHeader from '@components/CustomHeader'
-import { getPhoneNumber } from '@src/utils'
-import * as Api from '@src/services/api'
-import MainContent from '@components/MainContent'
-import SaveTheDate from '@src/Images/SaveTheDate.jpeg'
-import ErrorPage from '@components/Pages/ErrorPage'
-import InviteeContext, { defaultInvitee } from '@src/context/InviteeContext'
-import ResultPage from '@components/Pages/ResultPage'
+import CustomHeader from './components/CustomHeader'
+import { getPhoneNumber } from './utils'
+import * as Api from './services/api'
+import MainContent from './components/MainContent'
+// import SaveTheDate from './Images/SaveTheDate.jpeg'
+import ErrorPage from './components/Pages/ErrorPage'
+import InviteeContext, { defaultInvitee } from './context/InviteeContext'
+import ResultPage from './components/Pages/ResultPage'
+import SelectModal from './components/SelectModal'
 
 function App() {
   const { t, i18n } = useTranslation()
@@ -56,19 +57,9 @@ function App() {
         <header>
           <CustomHeader />
         </header>
-        {hasError ? (
-          <ErrorPage />
-        ) : (
-          <main>
-            {contentDislay}
-            <img
-              className='we-cute'
-              src={SaveTheDate}
-              alt='Two cute people that are getting married'
-            />
-          </main>
-        )}
-        <footer className='m-4 english'>
+        <SelectModal />
+        {hasError ? <ErrorPage /> : <main>{contentDislay}</main>}
+        <footer className='m-4'>
           <span style={{ fontStyle: 'italic' }}>Ofir Stiber</span>&copy; 2022
         </footer>
       </InviteeContext.Provider>

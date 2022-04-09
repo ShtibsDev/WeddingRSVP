@@ -3,8 +3,8 @@ $footer-height: 4rem;
 $bg-color: #f2ecde;
 
 @font-face {
-  font-family: dorian;
-  src: url('./Fonts/dorian/dorianclm-book-webfont.woff');
+  font-family: amatic;
+  src: url('./Fonts/Amatic_SC/AmaticSC-Regular.ttf');
 }
 
 html,
@@ -12,7 +12,7 @@ body,
 #root,
 .App {
   height: 100%;
-  font-family: 'dorian';
+  font-family: 'amatic';
 }
 
 .App {
@@ -31,7 +31,6 @@ body {
 
   ::before {
     content: '';
-    background-image: url('./Images/WoodBackground.JPEG');
     background-size: cover;
     position: absolute;
     top: 0px;
@@ -45,10 +44,6 @@ body {
       background-size: contain;
     }
   }
-}
-
-.english {
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 h1 {
@@ -67,57 +62,6 @@ h1 {
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 1fr;
-
-  main {
-    display: grid;
-
-    @media only screen and (max-width: 768px) {
-      grid-template-columns: 1fr;
-      grid-template-rows: 1fr;
-      overflow: hidden;
-
-      .main-content {
-        grid-column: 1;
-        grid-row: 1;
-      }
-
-      .we-cute {
-        transform: translate(20%, -10%);
-        grid-column: 1;
-        grid-row: 1;
-      }
-    }
-
-    @media only screen and (max-width: 991px) {
-      grid-template-columns: 1fr;
-      grid-template-rows: 1fr;
-      overflow: hidden;
-
-      .main-content {
-        grid-column: 1;
-        grid-row: 1;
-      }
-
-      .we-cute {
-        transform: translate(0, -15%);
-        grid-column: 1;
-        grid-row: 1;
-      }
-    }
-
-    @media only screen and (min-width: 992px) {
-      grid-template-columns: 5% 45% 45% 5%;
-
-      .main-content {
-        grid-column: 2;
-      }
-
-      .we-cute {
-        grid-column: 3;
-        max-height: 80vh;
-      }
-    }
-  }
 }
 
 .custome-header {

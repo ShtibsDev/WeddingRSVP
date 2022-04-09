@@ -1,4 +1,4 @@
-import Invitee from '@src/models/Invitee'
+import Invitee from '../models/Invitee'
 import { createContext } from 'react'
 
 export interface InviteeContextModel {

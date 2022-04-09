@@ -1,8 +1,8 @@
 import React, { FormEvent, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { classNames } from '@src/utils'
-import * as Api from '@src/services/api'
-import InviteeContext from '@src/context/InviteeContext'
+import { classNames } from '../utils'
+import * as Api from '../services/api'
+import InviteeContext from '../context/InviteeContext'
 
 export default function SingleForm(props: {
   goToResult?: () => void
