@@ -3,21 +3,17 @@ import { useTranslation } from 'react-i18next'
 import { classNames } from '../utils'
 import * as Api from '../services/api'
 import InviteeContext from '../context/InviteeContext'
+import SelectModal from './SelectModal'
 
-export default function SingleForm(props: {
-  goToResult?: () => void
-  className?: string
-}) {
+export default function SingleForm(props: { goToResult?: () => void, className?: string }) {
   const { t } = useTranslation()
   const { invitee, setInvitee } = useContext(InviteeContext)
   const [disableCheck, setDisableCheck] = useState(false)
   const [showSubmit, setShowSubmit] = useState(false)
+  const [modalVisibility, setModalVisibility] = useState(false)
 
-  const classes = classNames({
-    'form-select': true,
-    rtl: invitee.lang === 'he',
-  })
   const gender = invitee.isMale ? 'm' : 'f'
+  const classes = classNames({'form-select': true, rtl: invitee.lang === 'he'})
   const options = [
     { value: 1, text: t(`${gender}.options.arriving`) },
     { value: 2, text: t(`${gender}.options.stayingTheNight`) },
@@ -124,6 +120,8 @@ export default function SingleForm(props: {
             </button>
           )}
         </div>
+        <button type='button' onClick={() => setModalVisibility(true)}>asdf</button>
+        <SelectModal visibility={modalVisibility} setVisibility={setModalVisibility} />
       </form>
     </div>
   )

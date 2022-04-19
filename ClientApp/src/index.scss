@@ -12,6 +12,7 @@ body,
 #root,
 .App {
   height: 100%;
+  width: 100%;
   font-family: 'amatic';
 }
 
@@ -26,24 +27,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 1;
-  z-index: 1;
-
-  ::before {
-    content: '';
-    background-size: cover;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    opacity: 0.2;
-    z-index: -1;
-
-    @media only screen and (min-width: 769px) {
-      background-size: contain;
-    }
-  }
+  font-size: 25pt;  
 }
 
 h1 {
@@ -68,24 +52,6 @@ h1 {
   height: $header-height;
 }
 
-.we-cute {
-  overflow: hidden;
-  margin-left: auto;
-  margin-right: auto;
-
-  object-fit: contain;
-  max-height: 100vh;
-
-  @media only screen and (max-width: 991px) {
-    opacity: 0.4;
-    z-index: -1;
-  }
-
-  @media only screen and (min-width: 992px) {
-    border-radius: 10%;
-    box-shadow: inset 0 0px 4px 4px black;
-  }
-}
 
 @media only screen and (max-width: 768px) {
   form {
@@ -112,4 +78,34 @@ h1 {
 
 .submit-btn {
   animation: submit-insert 0.3s linear;
+}
+
+.modal-content {
+  height: 20rem;
+  border-radius: 2rem;
+}
+
+.bg {
+  background-size: contain;
+  height: 113px;
+
+  @media only screen and (min-width: 768px) {
+    height: 99px;
+  }
+}
+
+header.bg {
+  background-image: url('./Images/TopFlowers.png');
+
+  @media only screen and (min-width: 768px) {
+    background-image: url('./Images/TopDesktop.png');
+  }
+}
+
+footer.bg {
+  background-image: url('./Images/BottomFlowers.png');
+
+  @media only screen and (min-width: 768px) {
+    background-image: url('./Images/BottomDesktop.png');
+  }
 }

@@ -4,7 +4,7 @@ import CustomHeader from './components/CustomHeader'
 import { getPhoneNumber } from './utils'
 import * as Api from './services/api'
 import MainContent from './components/MainContent'
-// import SaveTheDate from './Images/SaveTheDate.jpeg'
+import TopFlowers from './Images/TopFlowers.png'
 import ErrorPage from './components/Pages/ErrorPage'
 import InviteeContext, { defaultInvitee } from './context/InviteeContext'
 import ResultPage from './components/Pages/ResultPage'
@@ -15,18 +15,9 @@ function App() {
 
   const [invitee, setInvitee] = useState(defaultInvitee)
   const [hasError, setHasError] = useState(false)
-  const [contentDislay, setContentDisplay] = useState(
-    <MainContent goToResult={goToResult} />
-  )
+  const [contentDislay, setContentDisplay] = useState(<MainContent goToResult={() => setContentDisplay(<ResultPage />)} />)
   const value = useMemo(() => ({ invitee, setInvitee }), [invitee])
-
-  function goToResult() {
-    setContentDisplay(<ResultPage />)
-  }
-
-  useEffect(() => {
-    getInvitee()
-  }, [])
+  useEffect(() => { getInvitee() }, [])
 
   async function getInvitee() {
     let phoneNumber = ''
@@ -54,14 +45,9 @@ function App() {
   return (
     <div className='App' dir={invitee.lang === 'he' ? 'rtl' : 'ltr'}>
       <InviteeContext.Provider value={value}>
-        <header>
-          <CustomHeader />
-        </header>
-        <SelectModal />
+        <header className='bg'/>
         {hasError ? <ErrorPage /> : <main>{contentDislay}</main>}
-        <footer className='m-4'>
-          <span style={{ fontStyle: 'italic' }}>Ofir Stiber</span>&copy; 2022
-        </footer>
+        <footer className='bg'/>
       </InviteeContext.Provider>
     </div>
   )

@@ -29,9 +29,7 @@ public class Startup
         services.Configure<DatabaseSettings>(Configuration.GetSection("WeddingArrivalsDB"));
         services.AddSingleton<IInviteeService, InviteeService>();
         // In production, the React files will be served from this directory
-        services.AddSpaStaticFiles(configuration => {
-            configuration.RootPath = "ClientApp/build";
-        });
+        services.AddSpaStaticFiles(configuration => {configuration.RootPath = "ClientApp/build";});
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +50,7 @@ public class Startup
         app.UseSpaStaticFiles();
 
         if (!env.IsDevelopment()) {
-            app.UseWebSockets();
+            //app.UseWebSockets();
         }
 
         app.UseRouting();
