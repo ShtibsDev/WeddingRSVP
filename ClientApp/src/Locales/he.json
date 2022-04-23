@@ -7,13 +7,14 @@
   },
   "errorMessage": "הכתובת אליה ניסיתם לפנות שגויה",
   "contactDeveloper": "אנא פנו למפתחים אם הבעיה חוזרת",
-  "weddingGettingClose": "החתונה שלנו מתקרבת",
   "onFriday": "ביום שישי",
   "invitationLink": "להזמנה לחתונה",
   "iAm": "אני",
   "finish": "סיום",
+  "onTime": "בשעה",
   "m": {
-    "canComeAgain": "אתה מוזמן לחזור ולענות  במועד אחר",
+    "weddingGettingClose": "החתונה שלנו מתקרבת ונשמח לדעת אם אתה מתכוון להגיע",
+    "canComeAgain": "אתה מוזמן לחזור ולענות במועד אחר",
     "pleaseChoose": "תבחר בבקשה",
     "bringPlusOne": "אתה מביא +1",
     "options": {
@@ -24,6 +25,7 @@
     }
   },
   "f": {
+    "weddingGettingClose": "החתונה שלנו מתקרבת ונשמח לדעת אם את מתכוונת להגיע",
     "pleaseChoose": "תבחרי בבקשה",
     "bringPlusOne": "את מביאה +1",
     "options": {

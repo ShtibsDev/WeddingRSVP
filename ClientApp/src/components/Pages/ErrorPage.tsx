@@ -9,9 +9,7 @@ export default function ErrorPage() {
     <div className='d-flex justify-content-center align-items-center'>
       <div className='d-flex flex-column' style={{ width: 'fit-content' }}>
         <h1>{t('errorMessage')}</h1>
-        <h2 style={{ fontStyle: 'italic', textAlign: isRtl ? 'left' : 'right' }}>
-          {t('contactDeveloper')}
-        </h2>
+        <h2 style={{ fontStyle: 'italic', textAlign: isRtl ? 'left' : 'right' }}>{t('contactDeveloper')}</h2>
       </div>
     </div>
   )

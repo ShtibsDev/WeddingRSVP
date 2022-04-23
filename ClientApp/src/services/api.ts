@@ -3,9 +3,7 @@ import Invitee from '@models/Invitee'
 
 export async function getInvitee(phoneNumber: string) {
   try {
-    const response = await axios.get<Invitee>(
-      `/api/Invitees/GetInvitee/${phoneNumber}`
-    )
+    const response = await axios.get<Invitee>(`/api/Invitees/GetInvitee/${phoneNumber}`)
 
     return response.data
   } catch (error) {

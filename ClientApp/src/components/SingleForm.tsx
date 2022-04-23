@@ -4,62 +4,42 @@ import { classNames } from '../utils'
 import * as Api from '../services/api'
 import InviteeContext from '../context/InviteeContext'
 import SelectModal from './SelectModal'
+import Invitee from '@models/Invitee'
 
-export default function SingleForm(props: { goToResult?: () => void, className?: string }) {
+export default function SingleForm(props: { goToResult?: () => void; className?: string }) {
   const { t } = useTranslation()
   const { invitee, setInvitee } = useContext(InviteeContext)
+  const [currentInvitee, setCurrentInvitee] = useState<Invitee | undefined>(invitee)
   const [disableCheck, setDisableCheck] = useState(false)
   const [showSubmit, setShowSubmit] = useState(false)
   const [modalVisibility, setModalVisibility] = useState(false)
 
   const gender = invitee.isMale ? 'm' : 'f'
-  const classes = classNames({'form-select': true, rtl: invitee.lang === 'he'})
+  const classes = classNames({
+    'form-select': true,
+    rtl: invitee.lang === 'he',
+  })
   const options = [
     { value: 1, text: t(`${gender}.options.arriving`) },
+    { value: 4, text: t(`${gender}.options.notComing`) },
     { value: 2, text: t(`${gender}.options.stayingTheNight`) },
     { value: 3, text: t(`${gender}.options.notSure`) },
-    { value: 4, text: t(`${gender}.options.notComing`) },
   ]
 
-  function handleAnswer(e: FormEvent<HTMLSelectElement>) {
-    setShowSubmit(true)
-
-    switch (e.currentTarget.value) {
-      case '1':
-        setInvitee({
-          ...invitee,
-          isArriving: true,
-          isStayingForNight: false,
-          isFinal: true,
-        })
-        setDisableCheck(false)
-        return
-      case '2':
-        setInvitee({
-          ...invitee,
-          isArriving: true,
-          isStayingForNight: true,
-          isFinal: true,
-        })
-        setDisableCheck(false)
-        return
-      case '3':
-        setDisableCheck(false)
-        return
-      case '4':
-        setInvitee({
-          ...invitee,
-          isArriving: false,
-          isStayingForNight: false,
-          isFinal: true,
-        })
-        setDisableCheck(true)
-        return
+  async function handleModalCahnge(e: FormEvent) {
+    if (invitee.isArriving !== undefined) {
+      if (invitee.group?.length) {
+        for (let i = 0; i < invitee.group.length; i++) {
+          const guest = invitee.group[i]
+          if (guest.isArriving === undefined) {
+            setCurrentInvitee(guest)
+            return
+          }
+        }
+      }
+      setCurrentInvitee(undefined)
+      return
     }
-  }
-
-  function handleCheck(e: FormEvent<HTMLInputElement>) {
-    setInvitee({ ...invitee, isBringsPlusOne: e.currentTarget.checked })
   }
 
   async function handleSubmit(e: FormEvent) {
@@ -72,56 +52,13 @@ export default function SingleForm(props: { goToResult?: () => void, className?:
 
   return (
     <div className={`single-form ${props.className} h-100`}>
-      <form
-        onSubmit={handleSubmit}
-        className='h-100 d-flex flex-column justify-content-evenly'
-      >
+      <form onSubmit={handleSubmit} className='h-100 d-flex flex-column justify-content-evenly'>
         <div>
-          <div className='d-flex container align-items-center'>
-            <div className='col-2'>
-              <strong>{t('iAm')}: </strong>
-            </div>
-            <div className='col-9'>
-              <select
-                name='opitons'
-                onInput={handleAnswer}
-                defaultValue={0}
-                className={classes}
-                required
-              >
-                <option value='0' disabled className='disabled'>
-                  {t(`${gender}.pleaseChoose`)}
-                </option>
-                {options.map((o) => (
-                  <option key={o.value} value={o.value}>
-                    {o.text}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className='d-flex container align-items-center justify-content-center'>
-            <input
-              type='checkbox'
-              onInput={handleCheck}
-              disabled={disableCheck}
-              id='plusOne'
-              className='form-check m-1'
-            />
-            <label htmlFor='plusOne' className='m-1'>
-              {t(`${gender}.bringPlusOne`)}?
-            </label>
-          </div>
+          <button className='flower-button rotation' type='button' onClick={() => setModalVisibility(true)}>
+            בחר
+          </button>
         </div>
-        <div style={{ height: 40 }}>
-          {showSubmit && (
-            <button type='submit' className='btn btn-outline-dark submit-btn'>
-              {t('finish')}
-            </button>
-          )}
-        </div>
-        <button type='button' onClick={() => setModalVisibility(true)}>asdf</button>
-        <SelectModal visibility={modalVisibility} setVisibility={setModalVisibility} />
+        <SelectModal invitee={currentInvitee} setInvitee={setInvitee} visibility={modalVisibility} setVisibility={setModalVisibility} />
       </form>
     </div>
   )

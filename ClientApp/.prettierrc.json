@@ -4,6 +4,7 @@
   "semi": false,
   "singleQuote": true,
   "jsxSingleQuote": true,
+  "printWidth": 150,
   "overrides": [
     {
       "files": [

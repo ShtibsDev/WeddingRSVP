@@ -5,33 +5,32 @@ import CustomHeader from './CustomHeader'
 import SelectModal from './SelectModal'
 import SingleForm from './SingleForm'
 
-export default function MainContent(props: {
+interface MainContentProps {
   goToResult?: () => void
   className?: string
-}) {
+}
+
+export default function MainContent({ goToResult, className }: MainContentProps) {
   const { t } = useTranslation()
   const { invitee } = useContext(InviteeContext)
+  const gender = invitee.isMale ? 'm' : 'f'
 
   return (
     <div className='App'>
       <header>
         <CustomHeader />
       </header>
-      <main className={`main-content ${props.className} h-100`}>
+      <main className={`main-content container ${className} h-100`}>
         <div className='h-100 d-flex flex-column'>
-          <h3 className='m-4'>
+          <h3 className='m-3'>
             {t('hey')} {invitee.firstName} {invitee.lastName}
           </h3>
-          <h5 className='m-3'>{t('weddingGettingClose')}</h5>
-          <h3 className='m-4'>
-            {t('onFriday')}
-            <br />
-            17/06/2022
-          </h3>
-          <a href='Invitation.pdf' className=''>
-            {t('invitationLink')}
-          </a>
-          <SingleForm goToResult={props.goToResult} className='col' />
+          <h3 className='m-2'>{t(`${gender}.weddingGettingClose`)}</h3>
+          <div>
+            <h3 className='m-2'>{t('onFriday')} 17/06/2022</h3>
+            <h3>{t('onTime')} 12:30</h3>
+          </div>
+          <SingleForm goToResult={goToResult} className='col' />
         </div>
       </main>
       <footer>

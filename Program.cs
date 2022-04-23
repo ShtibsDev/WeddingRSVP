@@ -39,7 +39,8 @@ public class Program
         return Host.CreateDefaultBuilder(args)
                    .UseSerilog()
                    .ConfigureWebHostDefaults(webBuilder => {
-                       webBuilder.UseStartup<Startup>();
+                       webBuilder.UseStartup<Startup>()
+                       .UseUrls("https://localhost:5001/", "https://*:5001");
                    });
     }
 }
