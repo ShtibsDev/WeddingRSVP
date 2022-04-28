@@ -1,4 +1,4 @@
 export default interface Option {
-  value: number
+  value: number | boolean
   text: string
 }

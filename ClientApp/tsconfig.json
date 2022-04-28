@@ -13,12 +13,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    "lib": [ "es2015", "dom" , "ESNext"],
+    "lib": ["es2015", "dom", "ESNext"],
     "baseUrl": "./",
     "paths": {
-      "@src/*": [ "src/*" ],
-      "@components/*": [ "src/components/*" ],
-      "@models/*": [ "src/models/*" ]
+      "@src/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@models/*": ["src/models/*"]
     },
     "skipLibCheck": false,
     "noFallthroughCasesInSwitch": true
