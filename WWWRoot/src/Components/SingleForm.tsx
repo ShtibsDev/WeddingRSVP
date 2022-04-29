@@ -9,7 +9,10 @@ import IProps from '@src/models/IProps'
 import { Modal, Row, Col } from 'react-bootstrap'
 import FlowerButton from './FlowerButton'
 import Option from '@models/Option'
-import { InviteeType } from '../models/Enums'
+import { InviteeType, ResponseType } from '../models/Enums'
+import MainSelect from './ModalContent/MainSelect'
+import KnownPlusOne from './ModalContent/KnowPlusOne'
+import AnonymusPlusOne from './ModalContent/AnonymusPlusOne'
 
 interface SingleFormProps extends IProps {
   goToResult?: () => void
@@ -26,10 +29,10 @@ export default function SingleForm({ goToResult, className }: SingleFormProps) {
   const gender = invitee.isMale ? 'm' : 'f'
 
   const [options, setOptions] = useState<Option[]>([
-    { value: 1, text: t(`${gender}.options.arriving`) },
-    { value: 2, text: t(`${gender}.options.stayingTheNight`) },
-    { value: 3, text: t(`${gender}.options.notSure`) },
-    { value: 4, text: t(`${gender}.options.notComing`) },
+    { value: ResponseType.Coming, text: t(`${gender}.options.arriving`) },
+    { value: ResponseType.StayingTheNight, text: t(`${gender}.options.stayingTheNight`) },
+    { value: ResponseType.NotSure, text: t(`${gender}.options.notSure`) },
+    { value: ResponseType.NotComing, text: t(`${gender}.options.notComing`) },
   ])
 
   const classes = classNames({
@@ -37,34 +40,21 @@ export default function SingleForm({ goToResult, className }: SingleFormProps) {
     rtl: invitee.lang === 'he',
   })
 
-  function getEvaluatedInvitee(inv: Invitee, option: Option) {
-    switch (option.value) {
-      case 1:
-        return {
-          ...inv,
-          isArriving: true,
-          isStayingForNight: false,
-          isFinal: true,
-        }
-      case 2:
-        return {
-          ...inv,
-          isArriving: true,
-          isStayingForNight: true,
-          isFinal: true,
-        }
-      case 4:
-        return {
-          ...inv,
-          isArriving: false,
-          isStayingForNight: false,
-          isFinal: true,
-        }
+  const modalContent = () => {
+    switch (currentInvitee.type) {
+      case InviteeType.MainInvitee:
+        return <MainSelect options={options} />
+      case InviteeType.KnownPlusOne:
+        return <KnownPlusOne options={options} />
+      case InviteeType.GroupMember:
+        return
+      case InviteeType.AnonymusPlusOne:
+        return <AnonymusPlusOne />
     }
-    return inv
   }
 
-  async function handleModalCahnge() {
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault()
     setModalVisibility(false)
 
     if (invitee.isArriving !== undefined) {
@@ -89,13 +79,13 @@ export default function SingleForm({ goToResult, className }: SingleFormProps) {
     }
   }
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault()
-    await Api.submitInvitee(invitee)
-    if (goToResult) {
-      goToResult()
-    }
-  }
+  // async function handleSubmit(e: FormEvent) {
+  //   e.preventDefault()
+  //   await Api.submitInvitee(invitee)
+  //   if (goToResult) {
+  //     goToResult()
+  //   }
+  // }
 
   return (
     <div className={`single-form ${className} h-100`}>
@@ -106,13 +96,7 @@ export default function SingleForm({ goToResult, className }: SingleFormProps) {
           </button>
         </div>
         <Modal className={invitee?.lang === 'he' ? 'rtl' : ''} centered={true} show={modalVisibility} onHide={() => setModalVisibility(false)}>
-          <Row className='justify-content-around align-items-center h-100 py-4'>
-            {options.map((option) => (
-              <Col key={Number(option.value)} className='d-flex justify-content-center align-items-center col-6'>
-                <FlowerButton onClick={handleModalCahnge} option={option} rotate={false} />
-              </Col>
-            ))}
-          </Row>
+          <Row className='justify-content-around align-items-center h-100 py-4'>{modalContent()}</Row>
         </Modal>
       </form>
     </div>

@@ -16,12 +16,12 @@ export default function MainContent({ goToResult, className }: MainContentProps)
   const gender = invitee.isMale ? 'm' : 'f'
 
   return (
-    <div className='App'>
+    <>
       <header>
         <CustomHeader />
       </header>
-      <main className={`main-content container ${className} h-100`}>
-        <div className='h-100 d-flex flex-column'>
+      <main className={`main-content container ${className}`}>
+        <div className='d-flex flex-column h-100'>
           <h3 className='m-3'>
             {t('hey')} {invitee.firstName} {invitee.lastName}
           </h3>
@@ -30,12 +30,12 @@ export default function MainContent({ goToResult, className }: MainContentProps)
             <h3 className='m-2'>{t('onFriday')} 17/06/2022</h3>
             <h3>{t('onTime')} 12:30</h3>
           </div>
-          <SingleForm goToResult={goToResult} className='col' />
+          <SingleForm goToResult={goToResult} />
         </div>
       </main>
       <footer>
         <span style={{ fontStyle: 'italic' }}>Ofir Stiber</span> &copy; 2022
       </footer>
-    </div>
+    </>
   )
 }

@@ -4,3 +4,10 @@ export enum InviteeType {
   GroupMember,
   AnonymusPlusOne,
 }
+
+export enum ResponseType {
+  Coming = 1,
+  StayingTheNight,
+  NotSure,
+  NotComing,
+}

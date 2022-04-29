@@ -1,10 +1,12 @@
-$header-height: 5rem;
-$footer-height: 4rem;
-$bg-color: #f2ecde;
-
 @font-face {
   font-family: amatic;
   src: url('./Fonts/Amatic_SC/AmaticSC-Regular.ttf');
+}
+
+.centered {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 html,
@@ -22,13 +24,7 @@ body,
 }
 
 body {
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 25pt;
+  font-size: 25px;
 }
 
 h1 {
@@ -50,49 +46,12 @@ h3 {
   grid-template-columns: 1fr;
 }
 
-.custome-header {
-  height: $header-height;
-}
-
-@media only screen and (max-width: 768px) {
-  form {
-    width: 75%;
-    margin: auto;
-  }
-}
-
-@keyframes submit-insert {
-  from {
-    transform: scale(0);
-    opacity: 0;
-  }
-
-  75% {
-    transform: scale(1.2);
-    opacity: 1;
-  }
-
-  to {
-    transform: scale(1);
-  }
-}
-
-.submit-btn {
-  animation: submit-insert 0.3s linear;
-}
-
 .modal-content {
-  // height: 30rem;
   border-radius: 2rem;
 }
 
 .bg {
-  background-size: contain;
-  height: 113px;
-
-  @media only screen and (min-width: 768px) {
-    height: 99px;
-  }
+  height: 3rem;
 }
 
 header.bg {
@@ -128,8 +87,8 @@ footer.bg {
 
   transform: scale(1);
   transition: transform ease-in-out 0.1s;
-  padding: 40px;
-  margin: 1rem;
+  padding: 1rem;
+  // margin: 1rem;
   color: black;
 
   &::before {
@@ -170,7 +129,7 @@ footer.bg {
   }
 }
 
-@-webkit-keyframes rotating /* Safari and Chrome */ {
+@-webkit-keyframes rotating {
   from {
     -webkit-transform: rotate(0deg);
     -o-transform: rotate(0deg);
