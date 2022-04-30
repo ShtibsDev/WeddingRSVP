@@ -7,6 +7,7 @@ export interface InviteeContextModel {
 }
 
 export const defaultInvitee: Invitee = {
+  _id: '',
   firstName: '',
   lastName: '',
   isBringsPlusOne: false,

@@ -13,6 +13,7 @@ import { InviteeType, ResponseType } from '../models/Enums'
 import MainSelect from './ModalContent/MainSelect'
 import KnownPlusOne from './ModalContent/KnowPlusOne'
 import AnonymusPlusOne from './ModalContent/AnonymusPlusOne'
+import GroupSelect from './ModalContent/GroupSelect'
 
 interface SingleFormProps extends IProps {
   goToResult?: () => void
@@ -47,7 +48,7 @@ export default function SingleForm({ goToResult, className }: SingleFormProps) {
       case InviteeType.KnownPlusOne:
         return <KnownPlusOne options={options} />
       case InviteeType.GroupMember:
-        return
+        return <GroupSelect options={options} />
       case InviteeType.AnonymusPlusOne:
         return <AnonymusPlusOne />
     }

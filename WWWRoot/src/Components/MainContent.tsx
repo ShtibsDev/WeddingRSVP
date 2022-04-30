@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import InviteeContext from '../context/InviteeContext'
 import CustomHeader from './CustomHeader'
-import SelectModal from './SelectModal'
 import SingleForm from './SingleForm'
 
 interface MainContentProps {

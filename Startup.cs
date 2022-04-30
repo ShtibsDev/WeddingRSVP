@@ -62,7 +62,7 @@ public class Startup
         });
 
         app.UseSpa(spa => {
-            spa.Options.SourcePath = "WWWroot";
+            spa.Options.SourcePath = "WWWRoot";
 
             if (env.IsDevelopment()) {
                 spa.UseReactDevelopmentServer(npmScript: "start");
