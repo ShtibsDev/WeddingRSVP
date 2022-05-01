@@ -1,5 +1,5 @@
-import Option from '@src/models/Option'
-import { classNames } from '../utils'
+import Option from '../models/Option'
+import { classNames, isMobile } from '../utils'
 import React from 'react'
 
 interface OptionsProps {
@@ -10,7 +10,7 @@ interface OptionsProps {
 
 export default function FlowerButton({ option, onClick, rotate = false }: OptionsProps) {
   const style = {
-    fontSize: option.text.split(' ').length < 3 ? 'larger' : '25pt',
+    fontSize: option.text.split(' ').length < 3 ? 'larger' : isMobile ? '22pt' : '25pt',
   }
 
   const classList = classNames({

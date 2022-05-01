@@ -89,8 +89,13 @@ footer.bg {
   transform: scale(1);
   transition: transform ease-in-out 0.1s;
   padding: 1rem;
-  // margin: 1rem;
+  margin: 1rem;
   color: black;
+
+  @media only screen and (max-width: 767px) {
+    height: 9rem;
+    width: 9rem;
+  }
 
   &::before {
     content: '';

@@ -15,6 +15,12 @@ export function classNames(classes: object) {
     .join(' ')
 }
 
+export const isMobile = window.innerWidth <= 768
+
+export async function wait(ms: number) {
+  await new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 export function getEvaluatedInvitee(inv: Invitee, option: Option) {
   switch (option.value) {
     case 1:

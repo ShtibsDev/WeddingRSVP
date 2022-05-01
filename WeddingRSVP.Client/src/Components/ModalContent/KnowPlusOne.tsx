@@ -1,32 +1,34 @@
 import InviteeContext from '../../context/InviteeContext'
-import Option from '@models/Option'
+import { ResponseType } from '../../models/Enums'
+import Invitee from '../../models/Invitee'
+import Option from '../../models/Option'
+import OptionsProps from '../../models/OptionsProps'
+import { getEvaluatedInvitee } from '../../utils'
 import React from 'react'
 import { useContext } from 'react'
 import { Col } from 'react-bootstrap'
-import { useTranslation } from 'react-i18next'
 import FlowerButton from '../FlowerButton'
 import FormContext from '../../context/FormContext'
 
-export default function AnonymusPlusOne() {
-  const { t } = useTranslation()
+export default function KnownPlusOne({ options }: OptionsProps) {
   const { invitee, setInvitee } = useContext(InviteeContext)
   const { handleForm } = useContext(FormContext)
-  const gender = invitee.isMale ? 'm' : 'f'
 
-  const yesNo: Option[] = [
-    { value: true, text: t('yes') },
-    { value: false, text: t('no') },
-  ]
+  const plusOne = (invitee.group as Invitee[])[0]
 
   const handleSelect = async (option: Option) => {
-    setInvitee({ ...invitee, isBringsPlusOne: !!option.value })
+    setInvitee({
+      ...invitee,
+      isBringsPlusOne: option.value === ResponseType.Coming || option.value === ResponseType.StayingTheNight,
+      group: [getEvaluatedInvitee(plusOne, option)],
+    })
     await handleForm()
   }
 
   return (
     <>
-      <h3>{t(`${gender}.bringPlusOne`)}</h3>
-      {yesNo.map((option) => (
+      <h3 className='text-center'>{plusOne.firstName}?</h3>
+      {options.map((option) => (
         <Col key={Number(option.value)} className='centered col-6'>
           <FlowerButton onClick={() => handleSelect(option)} option={option} rotate={false} />
         </Col>

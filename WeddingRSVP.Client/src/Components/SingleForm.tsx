@@ -11,6 +11,7 @@ import KnownPlusOne from './ModalContent/KnowPlusOne'
 import AnonymusPlusOne from './ModalContent/AnonymusPlusOne'
 import GroupSelect from './ModalContent/GroupSelect'
 import FromContext from '../context/FormContext'
+import { wait } from '../utils'
 
 interface SingleFormProps extends IProps {
   goToResult?: () => void
@@ -33,11 +34,6 @@ export default function SingleForm({ goToResult, className }: SingleFormProps) {
     { value: ResponseType.NotComing, text: t(`${gender}.options.notComing`) },
   ]
 
-  // const classes = classNames({
-  //   'form-select': true,
-  //   rtl: invitee.lang === 'he',
-  // })
-
   const modalContent = () => {
     switch (currentInvitee.type) {
       case InviteeType.MainInvitee:
@@ -53,6 +49,8 @@ export default function SingleForm({ goToResult, className }: SingleFormProps) {
 
   async function handleSubmit() {
     setModalVisibility(false)
+
+    await wait(250)
 
     if (invitee.isArriving !== undefined) {
       if (invitee.group?.length) {
@@ -85,8 +83,8 @@ export default function SingleForm({ goToResult, className }: SingleFormProps) {
           </button>
         </div>
         <Modal className={invitee?.lang === 'he' ? 'rtl' : ''} centered={true} show={modalVisibility} onHide={() => setModalVisibility(false)}>
-         <FromContext.Provider value={{handleForm: handleSubmit}}>
-          <Row className='justify-content-around align-items-center h-100 py-4'>{modalContent()}</Row>
+          <FromContext.Provider value={{ handleForm: handleSubmit }}>
+            <Row className='justify-content-around align-items-center h-100 py-4'>{modalContent()}</Row>
           </FromContext.Provider>
         </Modal>
       </form>

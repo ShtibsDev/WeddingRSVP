@@ -1,7 +1,6 @@
 import axios from 'axios'
-import Invitee from '@models/Invitee'
+import Invitee from '../models/Invitee'
 
-// require('dotenv').config()
 const server = 'https://localhost:7243'
 
 export async function getInvitee(phoneNumber: string) {
