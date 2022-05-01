@@ -1,0 +1,163 @@
+@font-face {
+  font-family: amatic;
+  src: url('./Fonts/Amatic_SC/AmaticSC-Regular.ttf');
+}
+
+.centered {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+html,
+body,
+#root,
+.App {
+  height: 100%;
+  width: 100%;
+  font-family: 'amatic';
+  color: black !important;
+}
+
+.App {
+  text-align: center;
+}
+
+body {
+  font-size: 25px;
+}
+
+h1 {
+  font-style: italic;
+  font-size: 40pt;
+}
+
+h3 {
+  font-size: 25pt;
+}
+
+.rtl {
+  direction: rtl;
+}
+
+.App {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr;
+}
+
+.modal-content {
+  border-radius: 2rem;
+}
+
+.bg {
+  height: 3rem;
+  background-size: cover;
+}
+
+header.bg {
+  @media only screen and (max-width: 767px) {
+    background-image: url('./Images/TopFlowers.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  @media only screen and (min-width: 768px) {
+    background-image: url('./Images/TopDesktop.png');
+  }
+}
+
+footer.bg {
+  @media only screen and (max-width: 767px) {
+    background-image: url('./Images/BottomFlowers.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  @media only screen and (min-width: 768px) {
+    background-image: url('./Images/BottomDesktop.png');
+  }
+}
+
+.flower-button {
+  position: relative;
+  height: 11rem;
+  width: 11rem;
+  background-color: transparent;
+  border: none;
+
+  transform: scale(1);
+  transition: transform ease-in-out 0.1s;
+  padding: 1rem;
+  // margin: 1rem;
+  color: black;
+
+  &::before {
+    content: '';
+    position: absolute;
+    background-image: url('./Images/FlowerCircle.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+  &.rotation {
+    &::before {
+      -webkit-animation: rotating 6s linear infinite;
+      -moz-animation: rotating 6s linear infinite;
+      -ms-animation: rotating 6s linear infinite;
+      -o-animation: rotating 6s linear infinite;
+      animation: rotating 6s linear infinite;
+      content: '';
+      position: absolute;
+      background-image: url('./Images/FlowerCircle.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.rotation {
+  content: '';
+}
