@@ -1,2 +1,2 @@
-# Wedding-Arival-Final
+# WeddingRSVP
 This is a digital RSVP system for my wedding. 
