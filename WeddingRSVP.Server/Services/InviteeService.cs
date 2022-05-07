@@ -34,12 +34,31 @@ public class InviteeService : IInviteeService
 
     public async Task SubmitRsvp(Invitee invitee)
     {
+        EvaluateResponse(invitee);
+        invitee.Group?.ForEach(member => EvaluateResponse(member));
         var dbInvitee = await _inviteeCollection.Find(i => i.Id == invitee.Id).FirstOrDefaultAsync();
-        if (dbInvitee.IsFinal) {
-            _looger.LogError("Invitee: {InviteeName} with phone number: {PhoneNumber} has tried to submit twice", $"{invitee.FirstName} {invitee.LastName}", invitee.PhoneNumber);
-            throw new PreviouslySubmitedException();
-        }
-
         await _inviteeCollection.ReplaceOneAsync(i => i.Id == invitee.Id, invitee);
+    }
+
+    private static void EvaluateResponse(Invitee invitee)
+    {
+        switch (invitee.Response) {
+            case ResponseType.Coming:
+                invitee.IsArriving = true;
+                invitee.IsStayingForNight = false;
+                return;
+            case ResponseType.StayingTheNight:
+                invitee.IsArriving = true;
+                invitee.IsStayingForNight = true;
+                return;
+            case ResponseType.NotComing:
+                invitee.IsArriving = false;
+                invitee.IsStayingForNight = false;
+                return;
+            default:
+                invitee.IsArriving = null;
+                invitee.IsStayingForNight = null;
+                return;
+        }
     }
 }

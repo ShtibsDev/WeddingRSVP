@@ -2,17 +2,18 @@ import React, { useContext } from 'react'
 import InviteeContext from '../../context/InviteeContext'
 import Option from '../../models/Option'
 import OptionsProps from '../../models/OptionsProps'
-import { getEvaluatedInvitee } from '../../utils'
+import { getEvaluatedInvitee, getOptions } from '../../utils'
 import { Col } from 'react-bootstrap'
 import FlowerButton from '../FlowerButton'
 import FormContext from '../../context/FormContext'
 
-export default function MainSelect({ options }: OptionsProps) {
+export default function MainSelect() {
   const { invitee, setInvitee } = useContext(InviteeContext)
   const { handleForm } = useContext(FormContext)
+  const options = getOptions(invitee.allowNight, invitee.isMale ? 'm' : 'f')
 
   const handleSelect = async (option: Option) => {
-    setInvitee(getEvaluatedInvitee(invitee, option))
+    setInvitee({ ...invitee, response: option.value })
     await handleForm()
   }
 

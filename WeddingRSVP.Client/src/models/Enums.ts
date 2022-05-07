@@ -6,7 +6,8 @@ export enum InviteeType {
 }
 
 export enum ResponseType {
-  Coming = 1,
+  None,
+  Coming,
   StayingTheNight,
   NotSure,
   NotComing,

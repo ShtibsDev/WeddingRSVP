@@ -6,6 +6,7 @@ import { Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import FlowerButton from '../FlowerButton'
 import FormContext from '../../context/FormContext'
+import YesNoOption from '../../models/YesNoOption'
 
 export default function AnonymusPlusOne() {
   const { t } = useTranslation()
@@ -13,13 +14,13 @@ export default function AnonymusPlusOne() {
   const { handleForm } = useContext(FormContext)
   const gender = invitee.isMale ? 'm' : 'f'
 
-  const yesNo: Option[] = [
+  const yesNo: YesNoOption[] = [
     { value: true, text: t('yes') },
     { value: false, text: t('no') },
   ]
 
-  const handleSelect = async (option: Option) => {
-    setInvitee({ ...invitee, isBringsPlusOne: !!option.value })
+  const handleSelect = async (option: YesNoOption) => {
+    setInvitee({ ...invitee, isBringsPlusOne: option.value })
     await handleForm()
   }
 

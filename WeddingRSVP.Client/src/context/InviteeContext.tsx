@@ -1,5 +1,6 @@
 import Invitee from '../models/Invitee'
 import { createContext } from 'react'
+import { ResponseType } from '../models/Enums'
 
 export interface InviteeContextModel {
   invitee: Invitee
@@ -7,7 +8,7 @@ export interface InviteeContextModel {
 }
 
 export const defaultInvitee: Invitee = {
-  _id: '',
+  id: '',
   firstName: '',
   lastName: '',
   isBringsPlusOne: false,
@@ -15,6 +16,8 @@ export const defaultInvitee: Invitee = {
   isGroup: false,
   isMale: true,
   lang: 'he',
+  allowNight: false,
+  response: ResponseType.None,
   phoneNumber: '',
 }
 

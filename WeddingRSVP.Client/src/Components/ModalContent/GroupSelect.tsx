@@ -1,96 +1,103 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import OptionsProps from '../../models/OptionsProps'
 import InviteeContext from '../../context/InviteeContext'
 import Option from '../../models/Option'
 import { useTranslation } from 'react-i18next'
-import { Col, FormSelect, Row } from 'react-bootstrap'
+import { Col, Form, FormSelect, Row } from 'react-bootstrap'
 import FlowerButton from '../FlowerButton'
 import Invitee from '../../models/Invitee'
-import { getEvaluatedInvitee } from '../../utils'
+import { getOptions } from '../../utils'
 import FormContext from '../../context/FormContext'
+import { ResponseType } from '../../models/Enums'
+import YesNoOption from '../../models/YesNoOption'
 
-export default function GroupSelect({ options }: OptionsProps) {
+export default function GroupSelect() {
   const { t } = useTranslation()
   const { invitee, setInvitee } = useContext(InviteeContext)
   const { handleForm } = useContext(FormContext)
+  // const [members, setMembers] = useState(invitee.group as Invitee[])
+  const [disableSubmit, setDisableSubmit] = useState(true)
+  useEffect(() => {
+    const disable = !!invitee.group?.some((m) => m.response === ResponseType.None)
+    setDisableSubmit(disable)
+  }, [invitee])
 
-  const [members, setMembers] = useState(invitee.group as Invitee[])
-  const [allowSubmit, setAllowSubmit] = useState(false)
-  const yesNo: Option[] = [
+  const yesNo: YesNoOption[] = [
     { value: true, text: t('yes') },
     { value: false, text: t('no') },
   ]
 
-  const groupNames = members.map((m) => m.firstName).join(', ').replace(/, ([^,]*)$/, ` ${t('and')}$1`)
+  const groupNames = invitee.group
+    ?.map((m) => m.firstName)
+    .join(', ')
+    .replace(/, ([^,]*)$/, ` ${t('and')}$1`)
 
-  const yesNoQuestion = (
-    <>
-      <h3>
-        {t('does')} {groupNames} {t('areComing')}?
-      </h3>
-
-      {yesNo.map((option) => (
-        <Col key={Number(option.value)} className='centered col-6'>
-          <FlowerButton onClick={() => handleYesNo(option)} option={option} rotate={false} />
-        </Col>
-      ))}
-    </>
-  )
-
-  const invdividualMember = (
-    <>
-      {members.map((member) => (
-        <>
-          <Row>
-            <Col>
-              {member.firstName} {member.lastName}
-            </Col>
-            <Col>
-              <FormSelect>
-                <option value={undefined}>בחר</option>
-                {options.map((option) => (
-                  <option onSelect={() => handleInvdividualMember(member._id, option)} key={+option.value} value={+option.value}>
-                    {option.text}
-                  </option>
-                ))}
-              </FormSelect>
-            </Col>
-          </Row>
-          <button onClick={submitMembers} disabled={allowSubmit} className='flower-button' type='button'>
-            אישור
-          </button>
-        </>
-      ))}
-    </>
-  )
-
-  const [question, setQuestion] = useState(yesNoQuestion)
-
-  const handleYesNo = async (option: Option) => {
+  const handleYesNo = async (option: YesNoOption) => {
     if (option.value) {
       setInvitee({
         ...invitee,
-        group: members.map((m) => ({
+        group: invitee.group?.map((m) => ({
           ...m,
-          isArriving: invitee.isArriving,
-          isStayingForNight: invitee.isStayingForNight,
+          response: invitee.response,
         })),
       })
       await handleForm()
     } else setQuestion(invdividualMember)
   }
 
-  const handleInvdividualMember = (id: string, option: Option) => {
-    setMembers(members.map((m) => (m._id === id ? getEvaluatedInvitee(m, option) : m)))
-    if (members.every((m) => m.isArriving !== undefined && m.isArriving !== null)) {
-      setAllowSubmit(true)
-    }
+  const handleInvdividualMember = (id: string, response: ResponseType) => {
+    setInvitee({ ...invitee, group: invitee.group?.map((m) => (m.id === id ? { ...m, response } : m)) })
   }
 
   const submitMembers = async () => {
-    setInvitee({ ...invitee, group: members })
+    // setInvitee({ ...invitee, group: members })
     await handleForm()
   }
+
+  const yesNoQuestion = (
+    <>
+      <h3 className='text-center'>{t('theyComeLikeYou').format(groupNames)}</h3>
+      <h4 className='text-center'>{t('describeGroup')}</h4>
+
+      {yesNo.map((option, i) => (
+        <Col key={i} className='centered col-6'>
+          <FlowerButton onClick={() => handleYesNo(option)} option={option} rotate={false} />
+        </Col>
+      ))}
+    </>
+  )
+
+  const [question, setQuestion] = useState(yesNoQuestion)
+
+  const invdividualMember = (
+    <>
+      {invitee.group?.map((member) => {
+        console.log('members in component', invitee.group)
+        return (
+          <Row key={member.id} className='my-2 px-4'>
+            <Col>
+              {member.firstName} {member.lastName}
+            </Col>
+            <Col>
+              <FormSelect onChange={(e) => handleInvdividualMember(member.id, +e.target.value)} value={member.response}>
+                <option value={ResponseType.None} disabled>
+                  בחר
+                </option>
+                {getOptions(invitee.allowNight, member.isMale ? 'm' : 'f').map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.text}
+                  </option>
+                ))}
+              </FormSelect>
+            </Col>
+          </Row>
+        )
+      })}
+      <button onClick={submitMembers} disabled={disableSubmit} className='flower-button' type='button'>
+        אישור
+      </button>
+    </>
+  )
 
   return question
 }

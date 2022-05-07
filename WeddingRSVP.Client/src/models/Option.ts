@@ -1,4 +1,8 @@
+import { ResponseType } from './Enums'
+
 export default interface Option {
-  value: number | boolean
+  value: ResponseType
   text: string
 }
+
+

@@ -3,14 +3,14 @@ import { ResponseType } from '../../models/Enums'
 import Invitee from '../../models/Invitee'
 import Option from '../../models/Option'
 import OptionsProps from '../../models/OptionsProps'
-import { getEvaluatedInvitee } from '../../utils'
+import { getEvaluatedInvitee, getOptions } from '../../utils'
 import React from 'react'
 import { useContext } from 'react'
 import { Col } from 'react-bootstrap'
 import FlowerButton from '../FlowerButton'
 import FormContext from '../../context/FormContext'
 
-export default function KnownPlusOne({ options }: OptionsProps) {
+export default function KnownPlusOne() {
   const { invitee, setInvitee } = useContext(InviteeContext)
   const { handleForm } = useContext(FormContext)
 
@@ -28,7 +28,7 @@ export default function KnownPlusOne({ options }: OptionsProps) {
   return (
     <>
       <h3 className='text-center'>{plusOne.firstName}?</h3>
-      {options.map((option) => (
+      {getOptions(invitee.allowNight, plusOne.isMale ? 'm' : 'f').map((option) => (
         <Col key={Number(option.value)} className='centered col-6'>
           <FlowerButton onClick={() => handleSelect(option)} option={option} rotate={false} />
         </Col>
