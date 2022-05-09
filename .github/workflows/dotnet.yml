@@ -22,4 +22,4 @@ jobs:
     - name: Build
       run: dotnet build WeddingRSVP.Server --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test WeddingRSVP.Server --no-build --verbosity normal
