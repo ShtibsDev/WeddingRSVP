@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: mcr.microsoft.com/${{ secrets.REGESTRY_USERNAME }}/appsvc/staticsite:${{ github.sha }}
+        tags: user/app:latest
         file: /WeddingRSVP.Server/Dockerfile
 
   deploy:
