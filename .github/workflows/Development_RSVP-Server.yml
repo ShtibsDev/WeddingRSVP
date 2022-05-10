@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_35f35a808b05442ab6b3d4b504d67b83 }}/appsvc/staticsite:${{ github.sha }}
+        tags: mcr.microsoft.com/${{ secrets.REGESTRY_USERNAME }}/appsvc/staticsite:${{ github.sha }}
         file: /WeddingRSVP.Server/Dockerfile
 
   deploy:
@@ -48,4 +48,4 @@ jobs:
         app-name: 'RSVP-Server'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_40a67e3e7eeb40409048d9cefe1b182a }}
-        images: 'mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_35f35a808b05442ab6b3d4b504d67b83 }}/appsvc/staticsite:${{ github.sha }}'
+        images: 'mcr.microsoft.com/${{ secrets.REGESTRY_USERNAME }}/appsvc/staticsite:${{ github.sha }}'
