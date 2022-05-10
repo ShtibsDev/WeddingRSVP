@@ -17,6 +17,8 @@ try {
 
     var app = builder.Build();
     Log.Information("Application Environment: {env}", app.Environment.EnvironmentName);
+    Log.Information("Listening on: {ip}", app.Environment.WebRootPath);
+
 
     if (app.Environment.IsDevelopment()) {
         app.UseSwagger();
