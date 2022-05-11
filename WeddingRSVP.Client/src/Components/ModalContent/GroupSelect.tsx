@@ -1,14 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
-import OptionsProps from '../../models/OptionsProps'
+import { useContext, useEffect, useState } from 'react'
 import InviteeContext from '../../context/InviteeContext'
-import Option from '../../models/Option'
 import { useTranslation } from 'react-i18next'
-import { Col, Form, FormSelect, Row } from 'react-bootstrap'
+import { Col, Row } from 'react-bootstrap'
 import FlowerButton from '../FlowerButton'
-import Invitee from '../../models/Invitee'
-import { getOptions } from '../../utils'
 import FormContext from '../../context/FormContext'
-import { ResponseType } from '../../models/Enums'
 import YesNoOption from '../../models/YesNoOption'
 import MemberSelect from '../MemberSelect'
 import MembersSubmitButton from '../MembersSubmitButton'
@@ -23,12 +18,19 @@ export default function GroupSelect() {
     { value: false, text: t('no') },
   ]
 
+  const [canSubmit, setCanSabmit] = useState(false)
+  useEffect(() => {
+    if (canSubmit) {
+      handleForm()
+    }
+  }, [invitee, canSubmit])
+
   const groupNames = invitee.group
     ?.map((m) => m.firstName)
     .join(', ')
     .replace(/, ([^,]*)$/, ` ${t('and')}$1`)
 
-  const handleYesNo = async (option: YesNoOption) => {
+  const handleYesNo = (option: YesNoOption) => {
     if (option.value) {
       setInvitee({
         ...invitee,
@@ -37,11 +39,9 @@ export default function GroupSelect() {
           response: invitee.response,
         })),
       })
-      await handleForm()
+      setCanSabmit(true)
     } else setQuestion(invdividualMember)
   }
-
-  const submitMembers = async () => await handleForm()
 
   const yesNoQuestion = (
     <>
@@ -70,7 +70,7 @@ export default function GroupSelect() {
           </Col>
         </Row>
       ))}
-      <MembersSubmitButton onClick={submitMembers}/>
+      <MembersSubmitButton onClick={() => setCanSabmit(true)} />
     </>
   )
 

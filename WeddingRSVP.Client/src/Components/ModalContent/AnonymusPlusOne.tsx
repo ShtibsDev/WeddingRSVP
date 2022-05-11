@@ -1,6 +1,5 @@
 import InviteeContext from '../../context/InviteeContext'
-import Option from '../../models/Option'
-import React from 'react'
+import { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { Col } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
@@ -19,14 +18,21 @@ export default function AnonymusPlusOne() {
     { value: false, text: t('no') },
   ]
 
-  const handleSelect = async (option: YesNoOption) => {
+  const [canSubmit, setCanSabmit] = useState(false)
+  useEffect(() => {
+    if (canSubmit) {
+      handleForm()
+    }
+  }, [invitee, canSubmit])
+
+  const handleSelect = (option: YesNoOption) => {
     setInvitee({ ...invitee, isBringsPlusOne: option.value })
-    await handleForm()
+    setCanSabmit(true)
   }
 
   return (
     <>
-      <h3>{t(`${gender}.bringPlusOne`)}</h3>
+      <h3 className='text-center'>{t(`${gender}.bringPlusOne`)}</h3>
       {yesNo.map((option) => (
         <Col key={Number(option.value)} className='centered col-6'>
           <FlowerButton onClick={() => handleSelect(option)} option={option} rotate={false} />

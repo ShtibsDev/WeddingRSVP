@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import InviteeContext from '../../context/InviteeContext'
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 
 export default function ResultPage() {
   const { t } = useTranslation()

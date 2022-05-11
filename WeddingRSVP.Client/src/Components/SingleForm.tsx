@@ -1,5 +1,4 @@
 import React, { FormEvent, useContext, useState } from 'react'
-// import { useTranslation } from 'react-i18next'
 import * as Api from '../services/api'
 import InviteeContext from '../context/InviteeContext'
 import IProps from '../models/IProps'
@@ -17,11 +16,9 @@ interface SingleFormProps extends IProps {
 }
 
 export default function SingleForm({ goToResult, className }: SingleFormProps) {
-  // const { t } = useTranslation()
   const { invitee } = useContext(InviteeContext)
   const [currentInvitee, setCurrentInvitee] = useState<InviteeType>(InviteeType.MainInvitee)
   const [modalVisibility, setModalVisibility] = useState(false)
-  // const gender = invitee.isMale ? 'm' : 'f'
 
   const modalContent = () => {
     switch (currentInvitee) {
@@ -41,12 +38,14 @@ export default function SingleForm({ goToResult, className }: SingleFormProps) {
 
     await wait(250)
 
-    if (invitee.isArriving !== undefined) {
+    if (invitee.response !== ResponseType.None) {
       if (invitee.group?.length) {
-        setCurrentInvitee(invitee.group.length === 1 ? InviteeType.KnownPlusOne : InviteeType.GroupMember)
-        setModalVisibility(true)
-        return
-      } else if (invitee.isBringsPlusOne === undefined) {
+        if (invitee.group.some((m) => m.response === ResponseType.None)) {
+          setCurrentInvitee(invitee.group.length === 1 ? InviteeType.KnownPlusOne : InviteeType.GroupMember)
+          setModalVisibility(true)
+          return
+        }
+      } else if (invitee.isBringsPlusOne === null) {
         setCurrentInvitee(InviteeType.AnonymusPlusOne)
         setModalVisibility(true)
         return
