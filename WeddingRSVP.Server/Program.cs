@@ -1,4 +1,3 @@
-using Serilog;
 using WeddingRSVP.Server.Data.Services;
 using WeddingRSVP.Server.Services;
 

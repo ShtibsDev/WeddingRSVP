@@ -1,7 +1,8 @@
 import axios from 'axios'
 import Invitee from '../models/Invitee'
 
-const server = 'https://localhost:7243'
+// const server = 'https://localhost:7243'
+const server = process.env.REACT_APP_SERVER_ADDRESS
 
 export async function getInvitee(phoneNumber: string) {
   try {
