@@ -5,7 +5,7 @@ import CustomHeader from './CustomHeader'
 import SingleForm from './SingleForm'
 
 interface MainContentProps {
-  goToResult?: () => void
+  goToResult: () => void
   className?: string
 }
 

@@ -1,7 +1,7 @@
 export enum InviteeType {
   MainInvitee,
   KnownPlusOne,
-  GroupMember,
+  GroupMembers,
   AnonymusPlusOne,
 }
 

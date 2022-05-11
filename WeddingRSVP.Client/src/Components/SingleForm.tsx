@@ -1,4 +1,4 @@
-import React, { FormEvent, useContext, useState } from 'react'
+import React, { FormEvent, useContext, useEffect, useState } from 'react'
 import * as Api from '../services/api'
 import InviteeContext from '../context/InviteeContext'
 import IProps from '../models/IProps'
@@ -12,13 +12,20 @@ import FromContext from '../context/FormContext'
 import { wait } from '../utils'
 
 interface SingleFormProps extends IProps {
-  goToResult?: () => void
+  goToResult: () => void
 }
 
 export default function SingleForm({ goToResult, className }: SingleFormProps) {
-  const { invitee } = useContext(InviteeContext)
+  const { invitee, setInvitee } = useContext(InviteeContext)
   const [currentInvitee, setCurrentInvitee] = useState<InviteeType>(InviteeType.MainInvitee)
   const [modalVisibility, setModalVisibility] = useState(false)
+  const [wasSubmited, setWasSubmited] = useState(false)
+
+  useEffect(() => {
+    if (wasSubmited) {
+      goToResult()
+    }
+  }, [invitee, wasSubmited])
 
   const modalContent = () => {
     switch (currentInvitee) {
@@ -26,7 +33,7 @@ export default function SingleForm({ goToResult, className }: SingleFormProps) {
         return <MainSelect />
       case InviteeType.KnownPlusOne:
         return <KnownPlusOne />
-      case InviteeType.GroupMember:
+      case InviteeType.GroupMembers:
         return <GroupSelect />
       case InviteeType.AnonymusPlusOne:
         return <AnonymusPlusOne />
@@ -41,7 +48,7 @@ export default function SingleForm({ goToResult, className }: SingleFormProps) {
     if (invitee.response !== ResponseType.None) {
       if (invitee.group?.length) {
         if (invitee.group.some((m) => m.response === ResponseType.None)) {
-          setCurrentInvitee(invitee.group.length === 1 ? InviteeType.KnownPlusOne : InviteeType.GroupMember)
+          setCurrentInvitee(invitee.group.length === 1 ? InviteeType.KnownPlusOne : InviteeType.GroupMembers)
           setModalVisibility(true)
           return
         }
@@ -51,9 +58,12 @@ export default function SingleForm({ goToResult, className }: SingleFormProps) {
         return
       }
 
-      await Api.submitInvitee(invitee)
-      if (goToResult) {
-        goToResult()
+      try {
+        const submitedData = await Api.submitInvitee(invitee)
+        setInvitee(submitedData)
+        setWasSubmited(true)
+      } catch (error) {
+        console.warn(error)
       }
     }
   }

@@ -38,12 +38,14 @@ public class InviteeService : IInviteeService
         return await _inviteeCollection.Find(_ => true).ToListAsync();
     }
 
-    public async Task SubmitRsvp(Invitee invitee)
+    public async Task<Invitee> SubmitRsvp(Invitee invitee)
     {
         EvaluateResponse(invitee);
         invitee.Group?.ForEach(member => EvaluateResponse(member));
         var dbInvitee = await _inviteeCollection.Find(i => i.Id == invitee.Id).FirstOrDefaultAsync();
         await _inviteeCollection.ReplaceOneAsync(i => i.Id == invitee.Id, invitee);
+        invitee.Group?.ForEach(async (member) => await _inviteeCollection.ReplaceOneAsync(i => i.Id == member.Id, member));
+        return invitee;
     }
 
     private static void EvaluateResponse(Invitee invitee)

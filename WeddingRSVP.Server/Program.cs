@@ -4,7 +4,7 @@ using WeddingRSVP.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCors(options => options.AddDefaultPolicy(p => p.AllowAnyOrigin()));
+builder.Services.AddCors(options => options.AddDefaultPolicy(p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
 builder.Services.AddControllers();
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("WeddingArrivalsDB"));
