@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using WeddingRSVP.Server.Data.Services;
 using WeddingRSVP.Server.Exceptions;
@@ -9,22 +8,29 @@ namespace WeddingRSVP.Server.Services;
 public class InviteeService : IInviteeService
 {
     private readonly IMongoCollection<Invitee> _inviteeCollection;
-    private readonly ILogger<InviteeService> _looger;
+    private readonly Serilog.ILogger _looger;
 
-    public InviteeService(IOptions<DatabaseSettings> dbSettings, ILogger<InviteeService> looger)
+    public InviteeService(IOptions<DatabaseSettings> dbSettings, Serilog.ILogger looger)
     {
         _looger = looger;
 
-        _looger.LogTrace("Establishing connection to database.");
+        _looger.Verbose("Establishing connection to database.");
         var mongoClient = new MongoClient(dbSettings.Value.ConnectionString);
         var mongoDatabase = mongoClient.GetDatabase(dbSettings.Value.DatabaseName);
         _inviteeCollection = mongoDatabase.GetCollection<Invitee>(dbSettings.Value.InviteesCollectionName);
-        _looger.LogTrace("Successfully established databse connection.");
+        _looger.Verbose("Successfully established databse connection.");
     }
 
     public async Task<Invitee> GetInvitee(string phoneNumber)
     {
-        return await _inviteeCollection.Find(i => i.PhoneNumber == phoneNumber).FirstOrDefaultAsync();
+        var invitee = await _inviteeCollection.Find(i => i.PhoneNumber == phoneNumber).FirstOrDefaultAsync();
+        if (invitee is null) {
+            _looger.Warning("Invitee with phone number {PhoneNumber} was not found", phoneNumber);
+        }
+        else {
+            _looger.Debug("Found Invitee: {@Invitee}", invitee);
+        }
+        return invitee;
     }
 
     public async Task<List<Invitee>> GetAllInvitees()

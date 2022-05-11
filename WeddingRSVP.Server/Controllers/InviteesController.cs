@@ -9,9 +9,9 @@ namespace WeddingRSVP.Server.Controllers;
 public class InviteesController : ControllerBase
 {
     private readonly IInviteeService _inviteeService;
-    private readonly ILogger<InviteesController> _logger;
+    private readonly Serilog.ILogger _logger;
 
-    public InviteesController(IInviteeService inviteeService, ILogger<InviteesController> logger)
+    public InviteesController(IInviteeService inviteeService, Serilog.ILogger logger)
     {
         _inviteeService = inviteeService;
         _logger = logger;
@@ -21,14 +21,14 @@ public class InviteesController : ControllerBase
     [Route("GetInvitee/{phoneNumber}")]
     public async Task<IActionResult> GetInvitee([FromRoute] string phoneNumber)
     {
-        _logger.LogInformation("Request arrived with the phone number: {phoneNumber}", phoneNumber);
+        _logger.Information("Request arrived with the phone number: {phoneNumber}", phoneNumber);
         if (phoneNumber == null) {
-            _logger.LogError("Recived an empty phone number");
+            _logger.Error("Recived an empty phone number");
             return BadRequest("Phone number cannot be null.");
         }
 
         var responseValue = await _inviteeService.GetInvitee(phoneNumber);
-        _logger.LogDebug("Responding with Invitee: {@invitee}", responseValue);
+        _logger.Debug("Responding with Invitee: {@invitee}", responseValue);
         return Ok(responseValue);
     }
 
@@ -36,16 +36,16 @@ public class InviteesController : ControllerBase
     [Route("SubmitInvitee")]
     public async Task<IActionResult> SubmitInvitee([FromBody] Invitee invitee)
     {
-        _logger.LogDebug("Recived Submition: {@invitee}", invitee);
+        _logger.Debug("Recived Submition: {@invitee}", invitee);
 
         if (invitee == null) {
-            _logger.LogError("Submition is empty.");
+            _logger.Error("Submition is empty.");
             return BadRequest();
         }
 
         try {
             await _inviteeService.SubmitRsvp(invitee);
-            _logger.LogInformation("Request from {InviteeName} submited successfuly", $"{invitee.FirstName} {invitee.LastName}");
+            _logger.Information("Request from {InviteeName} submited successfuly", $"{invitee.FirstName} {invitee.LastName}");
             return Ok();
         }
         catch (PreviouslySubmitedException) {
