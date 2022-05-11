@@ -94,20 +94,16 @@ footer.bg {
   width: 11rem;
   background-color: transparent;
   border: none;
-
   transform: scale(1);
-
+  opacity: 1;
   padding: 1rem;
   margin: 1rem;
   color: black;
+  transition: opacity 0.5s, transform ease-in-out 0.1s;
 
   @media only screen and (max-width: 767px) {
     height: 9rem;
     width: 9rem;
-  }
-
-  &:not(disabled) {
-    transition: transform ease-in-out 0.1s;
   }
 
   &:disabled {
@@ -127,27 +123,25 @@ footer.bg {
     z-index: -1;
   }
 
-  &.rotation {
-    &::before {
-      -webkit-animation: rotating 6s linear infinite;
-      -moz-animation: rotating 6s linear infinite;
-      -ms-animation: rotating 6s linear infinite;
-      -o-animation: rotating 6s linear infinite;
-      animation: rotating 6s linear infinite;
-      content: '';
-      position: absolute;
-      background-image: url('./Images/FlowerCircle.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      height: 100%;
-      width: 100%;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
+  &.rotation::before {
+    -webkit-animation: rotating 6s linear infinite;
+    -moz-animation: rotating 6s linear infinite;
+    -ms-animation: rotating 6s linear infinite;
+    -o-animation: rotating 6s linear infinite;
+    animation: rotating 6s linear infinite;
+    content: '';
+    position: absolute;
+    background-image: url('./Images/FlowerCircle.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
   }
 
-  &:hover:not(disabled) {
+  &:hover:not([disabled]) {
     transform: scale(1.1);
   }
 }
@@ -182,4 +176,12 @@ footer.bg {
 }
 .rotation {
   content: '';
+}
+
+.modal {
+  font-size: 24pt;
+
+  & select {
+    font-size: 20pt;
+  }
 }

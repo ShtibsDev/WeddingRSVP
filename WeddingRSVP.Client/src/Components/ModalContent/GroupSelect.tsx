@@ -10,17 +10,13 @@ import { getOptions } from '../../utils'
 import FormContext from '../../context/FormContext'
 import { ResponseType } from '../../models/Enums'
 import YesNoOption from '../../models/YesNoOption'
+import MemberSelect from '../MemberSelect'
+import MembersSubmitButton from '../MembersSubmitButton'
 
 export default function GroupSelect() {
   const { t } = useTranslation()
   const { invitee, setInvitee } = useContext(InviteeContext)
   const { handleForm } = useContext(FormContext)
-  // const [members, setMembers] = useState(invitee.group as Invitee[])
-  const [disableSubmit, setDisableSubmit] = useState(true)
-  useEffect(() => {
-    const disable = !!invitee.group?.some((m) => m.response === ResponseType.None)
-    setDisableSubmit(disable)
-  }, [invitee])
 
   const yesNo: YesNoOption[] = [
     { value: true, text: t('yes') },
@@ -45,14 +41,7 @@ export default function GroupSelect() {
     } else setQuestion(invdividualMember)
   }
 
-  const handleInvdividualMember = (id: string, response: ResponseType) => {
-    setInvitee({ ...invitee, group: invitee.group?.map((m) => (m.id === id ? { ...m, response } : m)) })
-  }
-
-  const submitMembers = async () => {
-    // setInvitee({ ...invitee, group: members })
-    await handleForm()
-  }
+  const submitMembers = async () => await handleForm()
 
   const yesNoQuestion = (
     <>
@@ -71,31 +60,17 @@ export default function GroupSelect() {
 
   const invdividualMember = (
     <>
-      {invitee.group?.map((member) => {
-        console.log('members in component', invitee.group)
-        return (
-          <Row key={member.id} className='my-2 px-4'>
-            <Col>
-              {member.firstName} {member.lastName}
-            </Col>
-            <Col>
-              <FormSelect onChange={(e) => handleInvdividualMember(member.id, +e.target.value)} value={member.response}>
-                <option value={ResponseType.None} disabled>
-                  בחר
-                </option>
-                {getOptions(invitee.allowNight, member.isMale ? 'm' : 'f').map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.text}
-                  </option>
-                ))}
-              </FormSelect>
-            </Col>
-          </Row>
-        )
-      })}
-      <button onClick={submitMembers} disabled={disableSubmit} className='flower-button' type='button'>
-        אישור
-      </button>
+      {invitee.group?.map((member) => (
+        <Row key={member.id} className='my-2 px-4'>
+          <Col>
+            {member.firstName} {member.lastName}
+          </Col>
+          <Col>
+            <MemberSelect memberId={member.id} />
+          </Col>
+        </Row>
+      ))}
+      <MembersSubmitButton onClick={submitMembers}/>
     </>
   )
 
