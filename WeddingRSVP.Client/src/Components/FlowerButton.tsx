@@ -1,6 +1,5 @@
 import Option from '../models/Option'
 import { classNames, isMobile } from '../utils'
-import React from 'react'
 import YesNoOption from '../models/YesNoOption'
 
 interface OptionsProps {

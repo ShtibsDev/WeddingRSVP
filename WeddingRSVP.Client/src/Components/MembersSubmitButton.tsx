@@ -4,7 +4,7 @@ import { ResponseType } from '../models/Enums'
 import IProps from '../models/IProps'
 
 interface MembersSubmitButtonProps extends IProps {
-  onClick: () => Promise<void>
+  onClick: () => void
 }
 
 export default function MembersSubmitButton({ onClick }: MembersSubmitButtonProps) {

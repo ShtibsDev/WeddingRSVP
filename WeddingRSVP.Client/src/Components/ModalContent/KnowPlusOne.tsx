@@ -2,9 +2,8 @@ import InviteeContext from '../../context/InviteeContext'
 import { ResponseType } from '../../models/Enums'
 import Invitee from '../../models/Invitee'
 import Option from '../../models/Option'
-import OptionsProps from '../../models/OptionsProps'
 import { getEvaluatedInvitee, getOptions } from '../../utils'
-import React from 'react'
+import { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { Col } from 'react-bootstrap'
 import FlowerButton from '../FlowerButton'
@@ -16,13 +15,20 @@ export default function KnownPlusOne() {
 
   const plusOne = (invitee.group as Invitee[])[0]
 
-  const handleSelect = async (option: Option) => {
+  const [canSubmit, setCanSabmit] = useState(false)
+  useEffect(() => {
+    if (canSubmit) {
+      handleForm()
+    }
+  }, [invitee, canSubmit])
+
+  const handleSelect = (option: Option) => {
     setInvitee({
       ...invitee,
       isBringsPlusOne: option.value === ResponseType.Coming || option.value === ResponseType.StayingTheNight,
-      group: [getEvaluatedInvitee(plusOne, option)],
+      group: [{...plusOne, response: option.value}],
     })
-    await handleForm()
+    setCanSabmit(true)
   }
 
   return (
