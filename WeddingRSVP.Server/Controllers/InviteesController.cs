@@ -38,18 +38,19 @@ public class InviteesController : ControllerBase
     {
         _logger.Debug("Recived Submition: {@invitee}", invitee);
 
-        if (invitee == null) {
+        if (invitee is null) {
             _logger.Error("Submition is empty.");
             return BadRequest();
         }
 
         try {
-            await _inviteeService.SubmitRsvp(invitee);
-            _logger.Information("Request from {InviteeName} submited successfuly", $"{invitee.FirstName} {invitee.LastName}");
-            return Ok();
+            var submitedData = await _inviteeService.SubmitRsvp(invitee);
+            _logger.Information("Request from  submited successfuly", $"{invitee.FirstName} {invitee.LastName}");
+            return Ok(submitedData);
         }
-        catch (PreviouslySubmitedException) {
-            return BadRequest(new { status = "PreviouslySubmitedException" });
+        catch (Exception ex) {
+            _logger.Error(ex, "Error submiting {InviteeName}", $"{invitee.FirstName} {invitee.LastName}");
+            return BadRequest(new { message = ex.Message });
         }
     }
 }

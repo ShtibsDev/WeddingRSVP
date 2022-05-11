@@ -1,7 +1,6 @@
 import axios from 'axios'
 import Invitee from '../models/Invitee'
 
-// const server = 'https://localhost:7243'
 const server = process.env.REACT_APP_SERVER_ADDRESS
 
 export async function getInvitee(phoneNumber: string) {
@@ -15,9 +14,7 @@ export async function getInvitee(phoneNumber: string) {
 }
 
 export async function submitInvitee(invitee: Invitee) {
-  try {
-    await axios.put(`${server}/api/Invitees/SubmitInvitee`, invitee)
-  } catch (error) {
-    console.warn(error)
-  }
+  const response = await axios.put<Invitee>(`${server}/api/Invitees/SubmitInvitee`, invitee)
+  if (response.data) return response.data
+  else throw new Error('Error with submited data')
 }
