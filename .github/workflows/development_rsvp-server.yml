@@ -28,18 +28,19 @@ jobs:
       - name: dotnet publish
         run: dotnet publish WeddingRSVP.Server -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
-      
       - name: App Settings Variable Substitution
         uses: microsoft/variable-substitution@v1
         with:
           files: '${{env.DOTNET_ROOT}}/myapp/appsettings.json'
         env:
           WeddingArrivalsDB.ConnectionString: ${{ secrets.CONNECTION_STRING }}
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
+      
 
   deploy:
     runs-on: windows-latest
