@@ -41,15 +41,18 @@ public class InviteeService : IInviteeService
     public async Task<Invitee> SubmitRsvp(Invitee invitee)
     {
         EvaluateResponse(invitee);
-        invitee.Group?.ForEach(member => EvaluateResponse(member));
+        invitee.Group?.ForEach(member => EvaluateResponse(member, invitee));
         var dbInvitee = await _inviteeCollection.Find(i => i.Id == invitee.Id).FirstOrDefaultAsync();
         await _inviteeCollection.ReplaceOneAsync(i => i.Id == invitee.Id, invitee);
         invitee.Group?.ForEach(async (member) => await _inviteeCollection.ReplaceOneAsync(i => i.Id == member.Id, member));
         return invitee;
     }
 
-    private static void EvaluateResponse(Invitee invitee)
+    private static void EvaluateResponse(Invitee invitee, Invitee mainInvitee = null)
     {
+        invitee.SubmittingInvitee = mainInvitee ?? invitee;
+        invitee.SubmittingInvitee.Group = null;
+
         switch (invitee.Response) {
             case ResponseType.Coming:
                 invitee.IsArriving = true;
