@@ -15,4 +15,5 @@ export default interface Invitee {
   isMale: boolean
   isFinal: boolean
   group?: Invitee[]
+  submittingInvitee?: Invitee
 }
