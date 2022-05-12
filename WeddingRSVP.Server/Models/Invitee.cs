@@ -19,4 +19,5 @@ public class Invitee
     public bool? IsBringsPlusOne { get; set; }
     public bool IsMale { get; set; }
     public List<Invitee> Group { get; set; }
+    public Invitee SubmittingInvitee { get; set; }
 }
