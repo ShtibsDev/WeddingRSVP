@@ -6,6 +6,7 @@ import MainContent from './Components/MainContent'
 import ErrorPage from './Components/Pages/ErrorPage'
 import InviteeContext, { defaultInvitee } from './context/InviteeContext'
 import ResultPage from './Components/Pages/ResultPage'
+import Loading from './Components/Loading'
 
 function App() {
   const { t, i18n } = useTranslation()
