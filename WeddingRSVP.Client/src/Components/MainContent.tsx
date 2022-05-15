@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import InviteeContext from '../context/InviteeContext'
 import CustomHeader from './CustomHeader'
+import Loading from './Loading'
 import SingleForm from './SingleForm'
 
 interface MainContentProps {
@@ -20,6 +21,8 @@ export default function MainContent({ goToResult, className }: MainContentProps)
         <CustomHeader />
       </header>
       <main className={`main-content container ${className}`}>
+        <Loading />
+
         <div className='d-flex flex-column h-100'>
           <h3 className='m-3'>
             {t('hey')} {invitee.firstName} {invitee.lastName}
