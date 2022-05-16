@@ -1,3 +1,4 @@
+import '../../font-awesome/css/all.min.css'
 import { useTranslation } from 'react-i18next'
 import InviteeContext from '../../context/InviteeContext'
 import { useContext } from 'react'
@@ -16,6 +17,13 @@ export default function ResultPage() {
   return (
     <div className='d-flex justify-content-center align-items-center main-content'>
       <h1>{msg}</h1>
+
+      <div>
+        <a href="" className="h3">
+          <i className="fa-brands fa-waze mx-1"></i>
+          קישור לWAZE
+        </a>
+      </div>
     </div>
   )
 }
