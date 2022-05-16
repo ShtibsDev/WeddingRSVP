@@ -9,7 +9,9 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(p => p.AllowAnyOrig
 builder.Services.AddControllers();
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("WeddingArrivalsDB"));
 builder.Services.AddSingleton<IInviteeService, InviteeService>();
-builder.Host.UseSerilog((context, logConfig) => logConfig.ReadFrom.Configuration(context.Configuration));
+builder.Host.UseSerilog((context, logConfig) => logConfig.ReadFrom.Configuration(context.Configuration)
+.WriteTo.AzureAnalytics(workspaceId: "08182fd1-cf64-4039-afdc-a7fe9bec4fd9", authenticationId: "9t8M8V4NYt66Oe+JmvTwY+KVUmcVNQNIAU3Bb5koGsE0XIfJF/60rUCGox1wo918qn/+FObv4ZL0bhK20ebtUg==")
+);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 try {
