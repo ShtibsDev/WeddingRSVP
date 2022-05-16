@@ -9,47 +9,12 @@ import ResultPage from './Components/Pages/ResultPage'
 import Loading from './Components/Loading'
 
 function App() {
-  const { t, i18n } = useTranslation()
-
-  const [invitee, setInvitee] = useState(defaultInvitee)
-  const [hasError, setHasError] = useState(false)
-  const [contentDislay, setContentDisplay] = useState(<MainContent goToResult={() => setContentDisplay(<ResultPage />)} />)
-  const value = useMemo(() => ({ invitee, setInvitee }), [invitee])
-
-  useEffect(() => {
-    getInvitee()
-  }, [])
-
-  async function getInvitee() {
-    let phoneNumber = ''
-    try {
-      phoneNumber = getPhoneNumber()
-    } catch {
-      setHasError(true)
-      return
-    }
-    if (phoneNumber !== null) {
-      const data = await Api.getInvitee(phoneNumber)
-      if (data) setInvitee(data)
-    }
-  }
-
-  useEffect(() => {
-    i18n.changeLanguage(invitee.lang)
-    const html = document.querySelector('html')
-    if (html) {
-      html.lang = invitee.lang
-    }
-    document.title = t('RSVPs')
-  }, [invitee])
 
   return (
-    <div className='App' dir={invitee.lang === 'he' ? 'rtl' : 'ltr'}>
-      <InviteeContext.Provider value={value}>
-        <header className='bg' />
-        {hasError ? <ErrorPage /> : <main className='App'>{contentDislay}</main>}
-        <footer className='bg' />
-      </InviteeContext.Provider>
+    <div className='App'>
+      <header className='bg' />
+      <main className='App'><MainContent /></main>
+      <footer className='bg' />
     </div>
   )
 }

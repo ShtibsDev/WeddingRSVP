@@ -12,3 +12,11 @@ export enum ResponseType {
   NotSure,
   NotComing,
 }
+
+export enum DisplayType{
+  MainDisplay,
+  Loading,
+  ResultPage,
+  GeneralError,
+  NotFound
+}

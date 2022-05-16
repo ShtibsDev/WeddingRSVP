@@ -50,8 +50,7 @@ public class InviteeService : IInviteeService
 
     private static void EvaluateResponse(Invitee invitee, Invitee mainInvitee = null)
     {
-        invitee.SubmittingInvitee = mainInvitee ?? invitee;
-        invitee.SubmittingInvitee.Group = null;
+        invitee.SubmittingInvitee = Clone(mainInvitee ?? invitee);
 
         switch (invitee.Response) {
             case ResponseType.Coming:
@@ -72,4 +71,23 @@ public class InviteeService : IInviteeService
                 return;
         }
     }
+
+    private static Invitee Clone(Invitee invitee)
+    {
+        return new Invitee {
+            AllowNight = invitee.AllowNight,
+            FirstName = invitee.FirstName,
+            LastName = invitee.LastName,
+            Id = invitee.Id,
+            IsArriving = invitee.IsArriving,
+            IsStayingForNight = invitee.IsStayingForNight,
+            IsBringsPlusOne = invitee.IsBringsPlusOne,
+            IsMale = invitee.IsMale,
+            Lang = invitee.Lang,
+            PhoneNumber = invitee.PhoneNumber,
+            Response = invitee.Response
+        };
+    }
+
+
 }

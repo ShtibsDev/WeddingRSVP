@@ -51,6 +51,15 @@ h3 {
   grid-template-columns: 1fr;
 }
 
+
+.fade-in {
+  transition: opacity .5s ease;
+}
+.fade-out {
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+
 .modal-content {
   border-radius: 2rem;
 }
@@ -158,7 +167,7 @@ footer.bg {
     transform: rotate(360deg);
   }
 }
-@keyframes rotating {
+@keyframes rotating  {
   from {
     -ms-transform: rotate(0deg);
     -moz-transform: rotate(0deg);
@@ -187,45 +196,42 @@ footer.bg {
 }
 
 .loading {
-  position: absolute;
   top: 0;
   left: 0;
   display: flex;
   width: 100%;
   height: 100%;
   z-index: 100;
-  background: rgba(0, 0, 0, 0.5);
   align-items: center;
   justify-content: center;
 }
 
 .loading-circle {
+  aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  height: 11rem;
-  width: 11rem;
   background-color: transparent;
+  font-size: 3rem;
   border: none;
-  transform: scale(1);
-  opacity: 1;
   padding: 1rem;
   margin: 1rem;
   color: black;
   text-align: center;
   vertical-align: middle;
-  transition: opacity 0.5s, transform ease-in-out 0.1s;
 
   @media only screen and (max-width: 767px) {
-    height: 9rem;
-    width: 9rem;
+    width: 75%;
+  }
+  @media only screen and (min-width: 768px) {
+    height: 50%;
   }
 
   &::before {
     content: '';
     position: absolute;
-    background-image: url('./Images/LoadingFlowers.png');
+    background-image: url('./Images/FlowerCircle.png');
     background-size: contain;
     background-repeat: no-repeat;
     height: 100%;
@@ -236,14 +242,14 @@ footer.bg {
   }
 
   &.rotation::before {
-    -webkit-animation: rotating 6s linear infinite;
-    -moz-animation: rotating 6s linear infinite;
-    -ms-animation: rotating 6s linear infinite;
-    -o-animation: rotating 6s linear infinite;
-    animation: rotating 6s linear infinite;
+    -webkit-animation: rotating 3s linear infinite;
+    -moz-animation: rotating 3s linear infinite;
+    -ms-animation: rotating 3s linear infinite;
+    -o-animation: rotating 3s linear infinite;
+    animation: rotating 3s linear infinite;
     content: '';
     position: absolute;
-    background-image: url('./Images/LoadingFlowers.png');
+    background-image: url('./Images/FlowerCircle.png');
     background-size: contain;
     background-repeat: no-repeat;
     height: 100%;
