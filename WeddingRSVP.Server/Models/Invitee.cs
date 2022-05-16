@@ -20,6 +20,4 @@ public class Invitee
     public bool IsMale { get; set; }
     public List<Invitee> Group { get; set; }
     public Invitee SubmittingInvitee { get; set; }
-
-    public Invitee Clone() => (Invitee)MemberwiseClone();
 }
