@@ -1,6 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import InviteeContext from '../../context/InviteeContext'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
+import CalendarEvent from '../../models/CalendarEvent'
+import AddEventBtn from '../AddEventBtn'
+
 
 export default function ResultPage() {
   const { t } = useTranslation()
@@ -23,6 +26,18 @@ export default function ResultPage() {
           קישור לWAZE
         </a>
       </div>
-    </div>
+
+
+
+      <AddEventBtn />
+
+      <div>
+        <a href="https://web.payboxapp.com/?v=j&g=62818b7f623a26000747f901#/" className="h3">
+          <i className="fa-solid fa-gift fa-beat mx-1"></i>
+          ברשותך לתת מתנה בPayBox
+        </a>
+      </div>
+
+    </div >
   )
 }

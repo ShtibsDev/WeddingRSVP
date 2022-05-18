@@ -9,6 +9,7 @@ import * as Api from '../services/api'
 import SingleForm from './SingleForm'
 import { DisplayType, ResponseType } from '../models/Enums'
 import ResultPage from './Pages/ResultPage'
+import ErrorPage from './Pages/ErrorPage'
 
 
 export default function MainContent() {
@@ -81,6 +82,9 @@ export default function MainContent() {
         break
       case DisplayType.ResultPage:
         setCurrentDisplay(<ResultPage />)
+        break
+      case DisplayType.GeneralError:
+        setCurrentDisplay(<ErrorPage />)
     }
 
     setFadeMode('fade-in')
