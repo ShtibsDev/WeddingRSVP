@@ -1,0 +1,47 @@
+{
+  "RSVPs": "אישורי הגעה",
+  "hey": "היי",
+  "names": {
+    "ofir": "Ofir",
+    "ellie": "Ellie"
+  },
+  "errorMessage": "הכתובת אליה ניסיתם לפנות שגויה",
+  "contactDeveloper": "אנא פנו למפתחים אם הבעיה חוזרת",
+  "theyComeLikeYou": "האם {0} מגיעים גם כן?",
+  "describeGroup": "(במידה ולא ניתן לבחור באופן פרטני)",
+  "onFriday": "ביום שישי",
+  "invitationLink": "להזמנה לחתונה",
+  "iAm": "אני",
+  "finish": "סיום",
+  "onTime": "בשעה",
+  "yes": "כן",
+  "no": "לא",
+  "and": "ו",
+  "does": "האם",
+  "areComing": "מגיעים",
+  "m": {
+    "weddingGettingClose": "החתונה שלנו מתקרבת ונשמח לדעת אם אתה מתכוון להגיע",
+    "canComeAgain": "אתה מוזמן לחזור ולענות במועד אחר",
+    "pleaseChoose": "תבחר בבקשה",
+    "bringPlusOne": "אתה מביא +1",
+    "options": {
+      "arriving": "מגיע",
+      "stayingTheNight": "מגיע ונשאר ללילה",
+      "notSure": "עוד לא יודע",
+      "notComing": "לא מגיע"
+    },
+    "lookingToSeeYou": "מצפים לראותך"
+  },
+  "f": {
+    "weddingGettingClose": "החתונה שלנו מתקרבת ונשמח לדעת אם את מתכוונת להגיע",
+    "pleaseChoose": "תבחרי בבקשה",
+    "bringPlusOne": "את מביאה +1",
+    "options": {
+      "arriving": "מגיעה",
+      "stayingTheNight": "מגיעה ונשארת ללילה",
+      "notSure": "עוד לא יודעת",
+      "notComing": "לא מגיעה"
+    },
+    "lookingToSeeYou": "מצפים לראותך"
+  }
+}
