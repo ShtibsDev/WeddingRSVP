@@ -70,12 +70,12 @@ h3 {
 }
 
 header.bg {
-  background-image: url('./Images/FlowerNewTop.png');
+  background-image: url('./Images/FlowerNewTop.webp');
   background-position: top;
 }
 
 footer.bg {
-  background-image: url('./Images/FlowerNewBottom.png');
+  background-image: url('./Images/FlowerNewBottom.webp');
   background-position: bottom;
 }
 
@@ -108,7 +108,7 @@ footer.bg {
   &::before {
     content: '';
     position: absolute;
-    background-image: url('./Images/FlowerCircle.png');
+    background-image: url('./Images/FlowerCircle.webp');
     background-size: contain;
     background-repeat: no-repeat;
     height: 100%;
@@ -126,7 +126,7 @@ footer.bg {
     animation: rotating 6s linear infinite;
     content: '';
     position: absolute;
-    background-image: url('./Images/FlowerCircle.png');
+    background-image: url('./Images/FlowerCircle.webp');
     background-size: contain;
     background-repeat: no-repeat;
     height: 100%;
@@ -217,7 +217,7 @@ footer.bg {
   &::before {
     content: '';
     position: absolute;
-    background-image: url('./Images/FlowerCircle.png');
+    background-image: url('./Images/FlowerCircle.webp');
     background-size: contain;
     background-repeat: no-repeat;
     height: 100%;
@@ -235,7 +235,7 @@ footer.bg {
     animation: rotating 3s linear infinite;
     content: '';
     position: absolute;
-    background-image: url('./Images/FlowerCircle.png');
+    background-image: url('./Images/FlowerCircle.webp');
     background-size: contain;
     background-repeat: no-repeat;
     height: 100%;

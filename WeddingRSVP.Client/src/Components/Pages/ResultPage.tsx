@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import InviteeContext from '../../context/InviteeContext'
 import { useContext, useEffect } from 'react'
 import AddEventBtn from '../Pages/ResultPage.AddEventBtn'
+import SelectedOption from './ResultPage.SelectedOption'
 
 
 export default function ResultPage() {
@@ -18,6 +19,8 @@ export default function ResultPage() {
   return (
     <div className='result-page'>
       <h2>{msg}</h2>
+
+      <SelectedOption/>
 
       <div>
         <a href="https://waze.com/ul/hsvbbgfueq" className="h2">
