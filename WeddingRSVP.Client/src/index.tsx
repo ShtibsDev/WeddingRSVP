@@ -1,5 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap/dist/js/bootstrap.bundle'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/js/dist/modal'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import './index.scss'
 import './services/i18n'
