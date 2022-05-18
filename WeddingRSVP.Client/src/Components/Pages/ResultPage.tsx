@@ -1,8 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import InviteeContext from '../../context/InviteeContext'
 import { useContext, useEffect } from 'react'
-import CalendarEvent from '../../models/CalendarEvent'
-import AddEventBtn from '../AddEventBtn'
+import AddEventBtn from '../Pages/ResultPage.AddEventBtn'
 
 
 export default function ResultPage() {
@@ -18,16 +17,14 @@ export default function ResultPage() {
 
   return (
     <div className='result-page'>
-      <h1>{msg}</h1>
+      <h2>{msg}</h2>
 
       <div>
-        <a href="https://waze.com/ul/hsvbbgfueq" className="h3">
+        <a href="https://waze.com/ul/hsvbbgfueq" className="h2">
           <i className="fa-brands fa-waze fa-bounce mx-1"></i>
           קישור לWAZE
         </a>
       </div>
-
-
 
       <AddEventBtn />
 

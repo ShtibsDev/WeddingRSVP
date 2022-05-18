@@ -64,32 +64,19 @@ h3 {
 }
 
 .bg {
-  height: 3rem;
-  background-size: cover;
+  height: 5rem;
+  background-size: contain;
+  background-repeat: repeat-x;
 }
 
 header.bg {
-  @media only screen and (max-width: 767px) {
-    background-image: url('./Images/TopFlowers.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-
-  @media only screen and (min-width: 768px) {
-    background-image: url('./Images/TopDesktop.png');
-  }
+  background-image: url('./Images/FlowerNewTop.png');
+  background-position: top;
 }
 
 footer.bg {
-  @media only screen and (max-width: 767px) {
-    background-image: url('./Images/BottomFlowers.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-
-  @media only screen and (min-width: 768px) {
-    background-image: url('./Images/BottomDesktop.png');
-  }
+  background-image: url('./Images/FlowerNewBottom.png');
+  background-position: bottom;
 }
 
 .single-form {
@@ -270,7 +257,7 @@ footer.bg {
   }
 }
 
-.error-Page{
+.error-Page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -282,7 +269,8 @@ footer.bg {
   --fa-animation-duration: 2s;
 }
 
-.atcb_text, .atcb_list_item{
+.atcb_text,
+.atcb_list_item {
   font-family: 'amatic';
   font-size: 2rem;
 }
@@ -293,17 +281,17 @@ footer.bg {
   display: grid;
   width: auto !important;
 
-  & svg{
-   width: auto;
+  & svg {
+    width: auto;
   }
 }
 
-.atcb_generated_button{
-  left: 50%!important;
-  transform: translateX(-50%)!important;
+.atcb_generated_button {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
 }
 
-.cal-btn{
+.cal-btn {
   align-items: center;
   background: rgb(245, 245, 245);
   border: 1px solid rgb(210, 210, 210);
@@ -323,7 +311,7 @@ footer.bg {
   text-align: center;
   touch-action: manipulation;
   transform: scale(1);
-  transition: all .15s ease-in-out;
+  transition: all 0.15s ease-in-out;
   -webkit-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -331,15 +319,15 @@ footer.bg {
   z-index: 1;
   min-width: fit-content;
 
-  [dir="rtl"] & i {
+  [dir='rtl'] & i {
     margin-left: 16px;
   }
 
-  [dir="ltr"] & i {
+  [dir='ltr'] & i {
     margin-right: 16px;
   }
 
-  &:hover{
+  &:hover {
     transform: scale(1.05);
   }
 }

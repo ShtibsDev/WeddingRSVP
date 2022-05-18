@@ -14,11 +14,16 @@ public class InviteeService : IInviteeService
     {
         _looger = looger;
 
-        _looger.Verbose("Establishing connection to database.");
-        var mongoClient = new MongoClient(dbSettings.Value.ConnectionString);
-        var mongoDatabase = mongoClient.GetDatabase(dbSettings.Value.DatabaseName);
-        _inviteeCollection = mongoDatabase.GetCollection<Invitee>(dbSettings.Value.InviteesCollectionName);
-        _looger.Verbose("Successfully established databse connection.");
+        try {
+            _looger.Verbose("Establishing connection to database.");
+            var mongoClient = new MongoClient(dbSettings.Value.ConnectionString);
+            var mongoDatabase = mongoClient.GetDatabase(dbSettings.Value.DatabaseName);
+            _inviteeCollection = mongoDatabase.GetCollection<Invitee>(dbSettings.Value.InviteesCollectionName);
+            _looger.Verbose("Successfully established databse connection.");
+        }
+        catch (Exception) {
+            _looger.Error("Unable to Connect to database");
+        }
     }
 
     public async Task<Invitee> GetInvitee(string phoneNumber)
