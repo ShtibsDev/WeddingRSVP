@@ -3,13 +3,14 @@ import * as Api from '../services/api'
 import InviteeContext from '../context/InviteeContext'
 import IProps from '../models/IProps'
 import { Modal, Row } from 'react-bootstrap'
-import { InviteeType, ResponseType } from '../models/Enums'
+import { DisplayType, InviteeType, ResponseType } from '../models/Enums'
 import MainSelect from './ModalContent/MainSelect'
 import KnownPlusOne from './ModalContent/KnowPlusOne'
 import AnonymusPlusOne from './ModalContent/AnonymusPlusOne'
 import GroupSelect from './ModalContent/GroupSelect'
 import FromContext from '../context/FormContext'
 import { wait } from '../utils'
+import DisplayContext from '../context/DisplayContext'
 
 interface SingleFormProps extends IProps {
   goToResult: () => void
@@ -17,13 +18,14 @@ interface SingleFormProps extends IProps {
 
 export default function SingleForm({ goToResult, className }: SingleFormProps) {
   const { invitee, setInvitee } = useContext(InviteeContext)
+  const {setDisplay} = useContext(DisplayContext)
   const [currentInvitee, setCurrentInvitee] = useState<InviteeType>(InviteeType.MainInvitee)
   const [modalVisibility, setModalVisibility] = useState(false)
   const [wasSubmited, setWasSubmited] = useState(false)
 
   useEffect(() => {
     if (wasSubmited) {
-      goToResult()
+      setDisplay(DisplayType.ResultPage)
     }
   }, [invitee, wasSubmited])
 
@@ -64,6 +66,7 @@ export default function SingleForm({ goToResult, className }: SingleFormProps) {
         setWasSubmited(true)
       } catch (error) {
         console.warn(error)
+        setDisplay(DisplayType.GeneralError)
       }
     }
   }

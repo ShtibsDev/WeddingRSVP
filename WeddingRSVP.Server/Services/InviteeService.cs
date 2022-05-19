@@ -38,11 +38,6 @@ public class InviteeService : IInviteeService
         return invitee;
     }
 
-    public async Task<List<Invitee>> GetAllInvitees()
-    {
-        return await _inviteeCollection.Find(_ => true).ToListAsync();
-    }
-
     public async Task<Invitee> SubmitRsvp(Invitee invitee)
     {
         EvaluateResponse(invitee);
@@ -53,9 +48,26 @@ public class InviteeService : IInviteeService
         return invitee;
     }
 
-    private static void EvaluateResponse(Invitee invitee, Invitee mainInvitee = null)
+    public async Task<Invitee> ResetSubmition(string id)
     {
-        invitee.SubmittingInvitee = Clone(mainInvitee ?? invitee);
+        var invitee = await _inviteeCollection.Find(i => i.Id == id).FirstOrDefaultAsync();
+        invitee.Response = ResponseType.None;
+        EvaluateResponse(invitee, setSubmitting: false);
+        invitee.Group?.ForEach(member => {
+            member.Response = ResponseType.None;
+            EvaluateResponse(member, setSubmitting: false);
+        });
+        return invitee;
+    }
+
+    public async Task<List<Invitee>> GetAllInvitees()
+    {
+        return await _inviteeCollection.Find(_ => true).ToListAsync();
+    }
+
+    private static void EvaluateResponse(Invitee invitee, Invitee mainInvitee = null, bool setSubmitting = true)
+    {
+        invitee.SubmittingInvitee = setSubmitting ? Clone(mainInvitee ?? invitee) : null;
 
         switch (invitee.Response) {
             case ResponseType.Coming:

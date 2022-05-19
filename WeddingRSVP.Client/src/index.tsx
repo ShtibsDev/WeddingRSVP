@@ -6,6 +6,7 @@ import './services/i18n'
 import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
+import Loading from './Components/Pages/Loading'
 
 declare global {
   interface String {
@@ -23,7 +24,7 @@ String.prototype.format = function () {
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loading/>}>
       <App />
     </Suspense>
   </React.StrictMode>

@@ -14,7 +14,13 @@ export async function getInvitee(phoneNumber: string) {
 }
 
 export async function submitInvitee(invitee: Invitee) {
-  const response = await axios.put<Invitee>(`${server}/api/Invitees/SubmitInvitee`, invitee)
+  const response = await axios.patch<Invitee>(`${server}/api/Invitees/SubmitInvitee`, invitee)
   if (response.data) return response.data
   else throw new Error('Error with submited data')
+}
+
+export async function resetSubmition(invitee: Invitee) {
+  const response = await axios.patch<Invitee>(`${server}/api/Invitees/ResetSubmition/${invitee.id}`)
+  if (response.data) return response.data
+  else throw new Error('Error with resetting submition')
 }

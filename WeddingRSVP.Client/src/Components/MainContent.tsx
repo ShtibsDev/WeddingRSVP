@@ -1,15 +1,15 @@
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import InviteeContext, { defaultInvitee } from '../context/InviteeContext'
 import i18n from '../services/i18n'
 import { getPhoneNumber, wait } from '../utils'
-import CustomHeader from './CustomHeader'
-import Loading from './Loading'
+import Loading from './Pages/Loading'
 import * as Api from '../services/api'
 import SingleForm from './SingleForm'
 import { DisplayType, ResponseType } from '../models/Enums'
 import ResultPage from './Pages/ResultPage'
 import ErrorPage from './Pages/ErrorPage'
+import DisplayContext from '../context/DisplayContext'
 
 
 export default function MainContent() {
@@ -92,20 +92,22 @@ export default function MainContent() {
   }
 
   return (
-    <InviteeContext.Provider value={value}>
-      <header>
-        <div className='custom-header'>
-          <h1>
-            {t('names.ellie')} &amp; {t('names.ofir')}
-          </h1>
-        </div>
-      </header>
-      <main className={`main-content container ${fadeMode}`}>
-        {currentDisplay}
-      </main>
-      <footer>
-        <span style={{ fontStyle: 'italic' }}>Ofir Stiber</span> &copy; 2022
-      </footer>
-    </InviteeContext.Provider>
+    <DisplayContext.Provider value={{ setDisplay }}>
+      <InviteeContext.Provider value={value}>
+        <header>
+          <div className='custom-header'>
+            <h1>
+              {t('names.ellie')} &amp; {t('names.ofir')}
+            </h1>
+          </div>
+        </header>
+        <main className={`main-content container ${fadeMode}`}>
+          {currentDisplay}
+        </main>
+        <footer>
+          <span style={{ fontStyle: 'italic' }}>Ofir Stiber</span> &copy; 2022
+        </footer>
+      </InviteeContext.Provider>
+    </DisplayContext.Provider>
   )
 }
