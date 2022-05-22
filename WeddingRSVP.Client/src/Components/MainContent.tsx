@@ -10,6 +10,7 @@ import { DisplayType, ResponseType } from '../models/Enums'
 import ResultPage from './Pages/ResultPage'
 import ErrorPage from './Pages/ErrorPage'
 import DisplayContext from '../context/DisplayContext'
+import MainDisplay from './MainContent.MainDisplay'
 
 
 export default function MainContent() {
@@ -53,21 +54,6 @@ export default function MainContent() {
     }
     document.title = t('RSVPs')
   }, [invitee])
-  const gender = invitee.isMale ? 'm' : 'f'
-
-  const mainDisplay = (
-    <div className='d-flex flex-column h-100'>
-      <h3 className='m-3'>
-        {t('hey')} {invitee.firstName} {invitee.lastName}
-      </h3>
-      <h3 className='m-2'>{t(`${gender}.weddingGettingClose`)}</h3>
-      <div>
-        <h3 className='m-2'>{t('onFriday')} 17/06/2022</h3>
-        <h3>{t('onTime')} 12:30</h3>
-      </div>
-      <SingleForm goToResult={() => { return }} />
-    </div>
-  )
 
   const setDisplay = async (displayType: DisplayType) => {
     setFadeMode('fade-out')
@@ -78,7 +64,7 @@ export default function MainContent() {
         setCurrentDisplay(<Loading />)
         break
       case DisplayType.MainDisplay:
-        setCurrentDisplay(mainDisplay)
+        setCurrentDisplay(<MainDisplay/>)
         break
       case DisplayType.ResultPage:
         setCurrentDisplay(<ResultPage />)

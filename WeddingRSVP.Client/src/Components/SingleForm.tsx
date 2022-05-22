@@ -54,7 +54,7 @@ export default function SingleForm({ goToResult, className }: SingleFormProps) {
           setModalVisibility(true)
           return
         }
-      } else if (invitee.isBringsPlusOne === null) {
+      } else if (invitee.isBringsPlusOne === null && !invitee.isPlusOne) {
         setCurrentInvitee(InviteeType.AnonymusPlusOne)
         setModalVisibility(true)
         return

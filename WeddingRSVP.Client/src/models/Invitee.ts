@@ -10,10 +10,10 @@ export default interface Invitee {
   allowNight: boolean
   isArriving?: boolean
   isStayingForNight?: boolean
+  isPlusOne: boolean
   isBringsPlusOne: boolean
   isGroup: boolean
   isMale: boolean
-  isFinal: boolean
   group?: Invitee[]
   submittingInvitee?: Invitee
 }

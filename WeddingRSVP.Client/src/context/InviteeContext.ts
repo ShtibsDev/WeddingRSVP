@@ -12,7 +12,7 @@ export const defaultInvitee: Invitee = {
   firstName: '',
   lastName: '',
   isBringsPlusOne: false,
-  isFinal: false,
+  isPlusOne: false,
   isGroup: false,
   isMale: true,
   lang: 'he',

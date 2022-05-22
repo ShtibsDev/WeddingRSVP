@@ -310,3 +310,9 @@ footer.bg {
     transform: scale(1.05);
   }
 }
+
+.confirmation-modal {
+  & .modal-content {
+    padding: 1rem;
+  }
+}

@@ -12,7 +12,6 @@ export default function ResultPage() {
 
   const msg = (() => {
     if (invitee.isArriving) return t(`${gender}.lookingToSeeYou`)
-    if (!invitee.isFinal) return t(`${gender}.canComeAgain`)
     return t(`${gender}.FU`)
   })()
 
@@ -23,7 +22,7 @@ export default function ResultPage() {
       <SelectedOption/>
 
       <div>
-        <a href="https://waze.com/ul/hsvbbgfueq" className="h2">
+        <a href="https://ul.waze.com/ul?place=ChIJrZaKX_QOHRURmEaC70NS8EA&ll=32.49111800%2C34.97570000&navigate=yes&utm_campaign=share_d&utm_source=waze_app&utm_medium=lm_share_location" className="h2">
           <i className="fa-brands fa-waze fa-bounce mx-1"></i>
           קישור לWAZE
         </a>
@@ -32,7 +31,7 @@ export default function ResultPage() {
       <AddEventBtn />
 
       <div>
-        <a href="https://web.payboxapp.com/?v=j&g=62818b7f623a26000747f901#/" className="h3">
+        <a href="https://payboxapp.page.link/LGVQ1vsHtHNnr1Ge9" className="h3">
           <i className="fa-solid fa-gift fa-beat mx-1"></i>
           ברשותך לתת מתנה בPayBox
         </a>
