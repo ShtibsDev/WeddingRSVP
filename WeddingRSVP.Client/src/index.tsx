@@ -24,9 +24,8 @@ String.prototype.format = function () {
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <Suspense fallback={<Loading/>}>
+    <Suspense fallback={<Loading />}>
       <App />
     </Suspense>
   </React.StrictMode>
 )
-
