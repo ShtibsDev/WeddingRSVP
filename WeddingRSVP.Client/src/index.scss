@@ -85,21 +85,25 @@ footer.bg {
 
 .flower-button {
   position: relative;
+  aspect-ratio: 1 / 1;
   height: 11rem;
-  width: 11rem;
   background-color: transparent;
   border: none;
   transform: scale(1);
   opacity: 1;
-  padding: 1rem;
+  padding: 2.5rem;
   margin: 1rem;
+  line-height: normal;
   color: black;
   transition: opacity 0.5s, transform ease-in-out 0.1s;
 
-  @media only screen and (max-width: 767px) {
-    height: 9rem;
-    width: 9rem;
-  }
+  // &.relative {
+  //   height: 90%;
+  // }
+
+  // @media only screen and (max-width: 767px) {
+  //   min-height: 9rem;
+  // }
 
   &:disabled {
     opacity: 0.6;
@@ -268,7 +272,6 @@ footer.bg {
 .fa-beat {
   --fa-animation-duration: 2s;
 }
-
 
 .cal-btn {
   align-items: center;
