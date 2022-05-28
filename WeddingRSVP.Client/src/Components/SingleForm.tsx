@@ -11,17 +11,16 @@ import GroupSelect from './ModalContent/GroupSelect'
 import FromContext from '../context/FormContext'
 import { wait } from '../utils'
 import DisplayContext from '../context/DisplayContext'
+import { useTranslation } from 'react-i18next'
 
-interface SingleFormProps extends IProps {
-  goToResult: () => void
-}
-
-export default function SingleForm({ goToResult, className }: SingleFormProps) {
+export default function SingleForm({ className }: IProps) {
+  const { t } = useTranslation()
   const { invitee, setInvitee } = useContext(InviteeContext)
-  const {setDisplay} = useContext(DisplayContext)
+  const { setDisplay } = useContext(DisplayContext)
   const [currentInvitee, setCurrentInvitee] = useState<InviteeType>(InviteeType.MainInvitee)
   const [modalVisibility, setModalVisibility] = useState(false)
   const [wasSubmited, setWasSubmited] = useState(false)
+  const gender = invitee.isMale ? 'm' : 'f'
 
   useEffect(() => {
     if (wasSubmited) {
@@ -76,7 +75,7 @@ export default function SingleForm({ goToResult, className }: SingleFormProps) {
       <form id='mainForm' onSubmit={(e) => e.preventDefault()} className='h-100 d-flex flex-column justify-content-evenly'>
         <div>
           <button className='flower-button rotation' type='button' onClick={() => setModalVisibility(true)}>
-            בחר
+            {t(`${gender}.select`)}
           </button>
         </div>
         <Modal className={invitee?.lang === 'he' ? 'rtl' : ''} centered={true} show={modalVisibility} onHide={() => setModalVisibility(false)}>

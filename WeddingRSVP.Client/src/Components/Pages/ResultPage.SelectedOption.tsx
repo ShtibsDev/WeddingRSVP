@@ -16,6 +16,8 @@ export default function SelectedOption() {
   const [wasReset, setWasReset] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [isSubmitter, setIsSubmitter] = useState(true)
+
+  const canReset = new Date() < new Date('2022-06-10')
   const option = getOptions(invitee.allowNight, invitee.isMale ? 'm' : 'f').find((o) => o.value === invitee.response)
 
   const yesNo: YesNoOption[] = [
@@ -47,16 +49,24 @@ export default function SelectedOption() {
 
   return (
     <div>
-      {!isSubmitter &&
-        <h4>{'נראה ש{0} כבר ענה בשבילך'.format(`${invitee.submittingInvitee?.firstName} ${invitee.submittingInvitee?.lastName}`)}</h4>
-      }
-      <h4>מה שבחרת</h4>
-      <button onClick={() => setShowModal(true)} className='flower-button rotation'>
+      {!isSubmitter ? (
+        <h4>
+          {t(`${invitee.submittingInvitee?.isMale ? 'm' : 'f'}.submittedForYou`).format(
+            `${invitee.submittingInvitee?.firstName} ${invitee.submittingInvitee?.lastName}`
+          )}
+        </h4>
+      ) : (
+        <h4>{t('yourSelection')}</h4>
+      )}
+
+      {canReset && <h4>{t('canReset')}</h4>}
+
+      <button disabled={!canReset} onClick={() => setShowModal(true)} className='flower-button rotation'>
         {option?.text}
       </button>
 
       <Modal show={showModal} centered={true} className='confirmation-modal'>
-        <h3 className='text-center'>אתה בטוח?</h3>
+        <h3 className='text-center'>{t(`${invitee.isMale ? 'm' : 'f'}.areYouSure`)}</h3>
         <Row>
           {yesNo.map((option, i) => (
             <Col key={i} className='centered col-6'>

@@ -1,4 +1,7 @@
+import { useTranslation } from 'react-i18next'
+
 export default function AddEventBtn() {
+  const { t } = useTranslation()
   const handleClick = () => {
     const link = document.createElement('a')
     const fileName = 'event.ics'
@@ -10,8 +13,8 @@ export default function AddEventBtn() {
 
   return (
     <button onClick={handleClick} className='cal-btn'>
-      <i className="fa-regular fa-calendar-plus"></i>
-      <span>הוסף ללוח השנה</span>
+      <i className='fa-regular fa-calendar-plus'></i>
+      <span>{t('addToCalendar')}</span>
     </button>
   )
 }

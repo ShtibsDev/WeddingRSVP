@@ -8,8 +8,10 @@ import { useContext } from 'react'
 import { Col } from 'react-bootstrap'
 import FlowerButton from '../FlowerButton'
 import FormContext from '../../context/FormContext'
+import { useTranslation } from 'react-i18next'
 
 export default function KnownPlusOne() {
+  const { t } = useTranslation()
   const { invitee, setInvitee } = useContext(InviteeContext)
   const { handleForm } = useContext(FormContext)
 
@@ -26,14 +28,14 @@ export default function KnownPlusOne() {
     setInvitee({
       ...invitee,
       isBringsPlusOne: option.value === ResponseType.Coming || option.value === ResponseType.StayingTheNight,
-      group: [{...plusOne, response: option.value}],
+      group: [{ ...plusOne, response: option.value }],
     })
     setCanSabmit(true)
   }
 
   return (
     <>
-      <h3 className='text-center'>{plusOne.firstName}?</h3>
+      <h3 className='text-center'>{t('whatAboutPlusOne').format(plusOne.firstName)}</h3>
       {getOptions(invitee.allowNight, plusOne.isMale ? 'm' : 'f').map((option) => (
         <Col key={Number(option.value)} className='centered col-6'>
           <FlowerButton onClick={() => handleSelect(option)} option={option} rotate={false} />

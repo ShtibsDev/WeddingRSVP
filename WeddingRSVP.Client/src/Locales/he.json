@@ -5,6 +5,8 @@
     "ofir": "Ofir",
     "ellie": "Ellie"
   },
+  "loading": "טוען...",
+  "thanksForSelecting": "תודה שבחרת",
   "errorMessage": "הכתובת אליה ניסיתם לפנות שגויה",
   "contactDeveloper": "אנא פנו למפתחים אם הבעיה חוזרת",
   "theyComeLikeYou": "האם {0} מגיעים גם כן?",
@@ -19,7 +21,16 @@
   "and": "ו",
   "does": "האם",
   "areComing": "מגיעים",
+  "whatAboutPlusOne": "ומה לגבי {0}?",
+  "addToCalendar": "הוספה ללוח השנה",
+  "linkToWaze": "קישור ל-Waze",
+  "yourSelection": "זה מה שבחרת",
+  "canReset": "(באפשרותך ללחוץ על בחירתך על מנת לבחור מחדש)",
   "m": {
+    "areYouSure": "האם אתה בטוח שאתה רוצה לבחור מחדש?",
+    "submittedForYou": "נראה ש{0} כבר ענה בשבילך",
+    "payWithPaybox": "אם תרצה - תוכל לתת מתנה דרך Paybox",
+    "select": "לחץ על מנת לבחור",
     "weddingGettingClose": "החתונה שלנו מתקרבת ונשמח לדעת אם אתה מתכוון להגיע",
     "canComeAgain": "אתה מוזמן לחזור ולענות במועד אחר",
     "pleaseChoose": "תבחר בבקשה",
@@ -33,6 +44,10 @@
     "lookingToSeeYou": "מצפים לראותך"
   },
   "f": {
+    "areYouSure": "האם את בטוחה שאת רוצה לבחור מחדש?",
+    "submittedForYou": "נראה ש{0} כבר ענתה בשבילך",
+    "payWithPaybox": "אם תרצי - תוכלי לתת מתנה דרך Paybox",
+    "select": "לחצי על מנת לבחור",
     "weddingGettingClose": "החתונה שלנו מתקרבת ונשמח לדעת אם את מתכוונת להגיע",
     "pleaseChoose": "תבחרי בבקשה",
     "bringPlusOne": "את מביאה +1",

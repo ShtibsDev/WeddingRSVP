@@ -1,6 +1,7 @@
 import Option from '../models/Option'
 import { classNames, isMobile } from '../utils'
 import YesNoOption from '../models/YesNoOption'
+import { useEffect, useRef, useState } from 'react'
 
 interface OptionsProps {
   option: Option | YesNoOption
@@ -9,8 +10,21 @@ interface OptionsProps {
 }
 
 export default function FlowerButton({ option, onClick, rotate = false }: OptionsProps) {
+  const ref = useRef<HTMLButtonElement>(null)
+  const [width, setWidth] = useState(ref.current?.clientWidth)
+
+  useEffect(() => setWidth(ref.current?.clientWidth), [ref.current])
+
+  const getFontSize = () => {
+    const fontSize = width! / Math.max(...option.text.split(' ').map((s) => s.length))
+    if (fontSize > 33) return '33px'
+    if (fontSize < 24) return '24px'
+    if (option.text.split(' ').length >= 3 && fontSize * 6 >= width!) return '27px'
+    return `${fontSize}px`
+  }
+
   const style = {
-    fontSize: option.text.split(' ').length < 3 ? 'larger' : isMobile ? '22pt' : '25pt',
+    fontSize: getFontSize(),
   }
 
   const classList = classNames({
@@ -21,7 +35,7 @@ export default function FlowerButton({ option, onClick, rotate = false }: Option
   const handleClick = () => onClick(option)
 
   return (
-    <button onClick={handleClick} className={classList} style={style}>
+    <button ref={ref} onClick={handleClick} className={classList} style={style}>
       {option.text}
     </button>
   )
