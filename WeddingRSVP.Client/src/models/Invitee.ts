@@ -16,4 +16,6 @@ export default interface Invitee {
   isMale: boolean
   group?: Invitee[]
   submittingInvitee?: Invitee
+  isSimpleCount?: boolean
+  groupCount: number
 }

@@ -12,6 +12,7 @@ import FromContext from '../context/FormContext'
 import { wait } from '../utils'
 import DisplayContext from '../context/DisplayContext'
 import { useTranslation } from 'react-i18next'
+import CountSelect from './ModalContent/CountSelect'
 
 export default function SingleForm({ className }: IProps) {
   const { t } = useTranslation()
@@ -43,6 +44,8 @@ export default function SingleForm({ className }: IProps) {
         return <GroupSelect />
       case InviteeType.AnonymusPlusOne:
         return <AnonymusPlusOne />
+      case InviteeType.CountGroup:
+        return <CountSelect />
     }
   }
 
@@ -52,16 +55,25 @@ export default function SingleForm({ className }: IProps) {
     await wait(250)
 
     if (invitee.response !== ResponseType.None) {
-      if (invitee.group?.length) {
-        if (invitee.group.some((m) => m.response === ResponseType.None)) {
-          setCurrentInvitee(invitee.group.length === 1 ? InviteeType.KnownPlusOne : InviteeType.GroupMembers)
+      if (invitee.isSimpleCount) {
+        if (!invitee.groupCount) {
+          setCurrentInvitee(InviteeType.CountGroup)
           setModalVisibility(true)
           return
         }
-      } else if (invitee.isBringsPlusOne === null && !invitee.isPlusOne) {
-        setCurrentInvitee(InviteeType.AnonymusPlusOne)
-        setModalVisibility(true)
-        return
+      }
+      else {
+        if (invitee.group?.length) {
+          if (invitee.group.some((m) => m.response === ResponseType.None)) {
+            setCurrentInvitee(invitee.group.length === 1 ? InviteeType.KnownPlusOne : InviteeType.GroupMembers)
+            setModalVisibility(true)
+            return
+          }
+        } else if (invitee.isBringsPlusOne === null && !invitee.isPlusOne) {
+          setCurrentInvitee(InviteeType.AnonymusPlusOne)
+          setModalVisibility(true)
+          return
+        }
       }
 
 

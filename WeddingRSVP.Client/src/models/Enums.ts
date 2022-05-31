@@ -2,6 +2,7 @@ export enum InviteeType {
   MainInvitee,
   KnownPlusOne,
   GroupMembers,
+  CountGroup,
   AnonymusPlusOne,
 }
 

@@ -63,7 +63,7 @@ export default function GroupSelect() {
       {invitee.group?.map((member) => (
         <Row key={member.id} className='my-2 px-4'>
           <Col>
-            {member.firstName} {member.lastName}
+            {member.firstName}
           </Col>
           <Col>
             <MemberSelect memberId={member.id} />

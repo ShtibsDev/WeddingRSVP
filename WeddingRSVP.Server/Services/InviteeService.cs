@@ -52,6 +52,7 @@ public class InviteeService : IInviteeService
     {
         var invitee = await _inviteeCollection.Find(i => i.Id == id).FirstOrDefaultAsync();
         invitee.Response = ResponseType.None;
+        invitee.GroupCount = 0;
         EvaluateResponse(invitee, setSubmitting: false);
         invitee.Group?.ForEach(member => {
             member.Response = ResponseType.None;

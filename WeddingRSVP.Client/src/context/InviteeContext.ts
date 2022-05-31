@@ -19,6 +19,7 @@ export const defaultInvitee: Invitee = {
   allowNight: false,
   response: ResponseType.None,
   phoneNumber: '',
+  groupCount: 0,
 }
 
 const InviteeContext = createContext<InviteeContextModel>({

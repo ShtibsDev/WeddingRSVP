@@ -24,7 +24,7 @@ body,
 }
 
 body {
-  font-size: 25px;
+  font-size: 23px;
 }
 
 h1 {
@@ -61,6 +61,20 @@ h3 {
 
 .modal-content {
   border-radius: 2rem;
+
+  .center {
+    text-align: center;
+  }
+}
+
+.count-modal {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  .form-select {
+    width: 30%;
+  }
 }
 
 .bg {
@@ -86,7 +100,8 @@ footer.bg {
 .flower-button {
   position: relative;
   aspect-ratio: 1 / 1;
-  height: 11rem;
+  height: 9rem;
+  width: 9rem;
   background-color: transparent;
   border: none;
   transform: scale(1);
@@ -178,10 +193,10 @@ footer.bg {
 }
 
 .modal {
-  font-size: 24pt;
+  font-size: 23pt;
 
-  & select {
-    font-size: 20pt;
+  select {
+    font-size: 23px;
   }
 }
 
