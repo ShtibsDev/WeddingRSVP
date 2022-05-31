@@ -61,7 +61,7 @@ export default function SelectedOption() {
 
       {canReset && <h4>{t('canReset')}</h4>}
 
-      <button disabled={!canReset} onClick={() => setShowModal(true)} className='flower-button rotation'>
+      <button disabled={!canReset} onClick={() => setShowModal(true)} className='flower-button rotation m-0'>
         {option?.text}
       </button>
 
