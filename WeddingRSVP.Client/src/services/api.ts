@@ -4,13 +4,11 @@ import Invitee from '../models/Invitee'
 const server = process.env.REACT_APP_SERVER_ADDRESS
 
 export async function getInvitee(phoneNumber: string) {
-  try {
-    const response = await axios.get<Invitee>(`${server}/api/Invitees/GetInvitee/${phoneNumber}`)
+  const response = await axios.get<Invitee>(`${server}/api/Invitees/GetInvitee/${phoneNumber}`)
 
-    return response.data
-  } catch (error) {
-    console.warn(error)
-  }
+  if (response.status === 204) throw 204
+
+  return response.data
 }
 
 export async function submitInvitee(invitee: Invitee) {

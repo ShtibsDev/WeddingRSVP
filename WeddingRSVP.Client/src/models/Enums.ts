@@ -13,10 +13,11 @@ export enum ResponseType {
   NotComing,
 }
 
-export enum DisplayType{
+export enum DisplayType {
   MainDisplay,
   Loading,
   ResultPage,
   GeneralError,
-  NotFound
+  UrlError,
+  NotFound,
 }

@@ -38,7 +38,7 @@ export default function SelectedOption() {
     if (option.value) {
       try {
         setWasReset(true)
-        setDisplay(DisplayType.Loading)
+        await setDisplay(DisplayType.Loading)
         const ressult = await resetSubmition(invitee)
         setInvitee(ressult)
       } catch (error) {

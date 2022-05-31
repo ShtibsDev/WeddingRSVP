@@ -23,10 +23,15 @@ export default function SingleForm({ className }: IProps) {
   const gender = invitee.isMale ? 'm' : 'f'
 
   useEffect(() => {
-    if (wasSubmited) {
-      setDisplay(DisplayType.ResultPage)
-    }
+    goToResult()
   }, [invitee, wasSubmited])
+
+  const goToResult = async () => {
+    if (wasSubmited) {
+      await wait(1000)
+      await setDisplay(DisplayType.ResultPage)
+    }
+  }
 
   const modalContent = () => {
     switch (currentInvitee) {
@@ -59,10 +64,12 @@ export default function SingleForm({ className }: IProps) {
         return
       }
 
+
       try {
+        setDisplay(DisplayType.Loading)
         const submitedData = await Api.submitInvitee(invitee)
-        setInvitee(submitedData)
         setWasSubmited(true)
+        setInvitee(submitedData)
       } catch (error) {
         console.warn(error)
         setDisplay(DisplayType.GeneralError)

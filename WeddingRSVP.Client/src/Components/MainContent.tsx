@@ -29,19 +29,23 @@ export default function MainContent() {
     try {
       phoneNumber = getPhoneNumber()
     } catch {
-      await setDisplay(DisplayType.GeneralError)
+      await setDisplay(DisplayType.UrlError)
       return
     }
     if (phoneNumber !== null) {
-      const data = await Api.getInvitee(phoneNumber)
-      if (data) {
-        setInvitee(data)
-        if (data.response === ResponseType.None)
-          setDisplay(DisplayType.MainDisplay)
-        else
-          setDisplay(DisplayType.ResultPage)
+      try {
+        const data = await Api.getInvitee(phoneNumber)
+        if (data) {
+          setInvitee(data)
+          if (data.response === ResponseType.None) setDisplay(DisplayType.MainDisplay)
+          else setDisplay(DisplayType.ResultPage)
+        }
+        else setDisplay(DisplayType.NotFound)
+
+      } catch (error) {
+        if (error === 204) setDisplay(DisplayType.NotFound)
+        else setDisplay(DisplayType.GeneralError)
       }
-      else setDisplay(DisplayType.NotFound)
     }
   }
 
@@ -55,26 +59,35 @@ export default function MainContent() {
     document.title = t('RSVPs')
   }, [invitee])
 
-  const setDisplay = async (displayType: DisplayType) => {
+  const setDisplay = async (displayType: DisplayType, willWait = true) => {
     setFadeMode('fade-out')
-    await wait(500)
+    if (willWait)
+      await wait(500)
 
     switch (displayType) {
       case DisplayType.Loading:
         setCurrentDisplay(<Loading />)
         break
       case DisplayType.MainDisplay:
-        setCurrentDisplay(<MainDisplay/>)
+        setCurrentDisplay(<MainDisplay />)
         break
       case DisplayType.ResultPage:
         setCurrentDisplay(<ResultPage />)
         break
+      case DisplayType.UrlError:
+        setCurrentDisplay(<ErrorPage msg={t('urlError')} />)
+        break
+      case DisplayType.NotFound:
+        setCurrentDisplay(<ErrorPage msg={t('inviteeNotFound')} />)
+        break
       case DisplayType.GeneralError:
-        setCurrentDisplay(<ErrorPage />)
+        setCurrentDisplay(<ErrorPage msg={t('generalError')} />)
+        break
     }
 
     setFadeMode('fade-in')
-    await wait(500)
+    if (willWait)
+      await wait(500)
   }
 
   return (
