@@ -55,24 +55,28 @@ export default function SingleForm({ className }: IProps) {
     await wait(250)
 
     if (invitee.response !== ResponseType.None) {
-      if (invitee.isSimpleCount) {
-        if (!invitee.groupCount) {
-          setCurrentInvitee(InviteeType.CountGroup)
-          setModalVisibility(true)
-          return
-        }
-      }
-      else {
-        if (invitee.group?.length) {
-          if (invitee.group.some((m) => m.response === ResponseType.None)) {
-            setCurrentInvitee(invitee.group.length === 1 ? InviteeType.KnownPlusOne : InviteeType.GroupMembers)
+
+
+      if (invitee.response !== ResponseType.NotSure && invitee.response !== ResponseType.NotComing) {
+        if (invitee.isSimpleCount) {
+          if (!invitee.groupCount) {
+            setCurrentInvitee(InviteeType.CountGroup)
             setModalVisibility(true)
             return
           }
-        } else if (invitee.isBringsPlusOne === null && !invitee.isPlusOne) {
-          setCurrentInvitee(InviteeType.AnonymusPlusOne)
-          setModalVisibility(true)
-          return
+        }
+        else {
+          if (invitee.group?.length) {
+            if (invitee.group.some((m) => m.response === ResponseType.None)) {
+              setCurrentInvitee(invitee.group.length === 1 ? InviteeType.KnownPlusOne : InviteeType.GroupMembers)
+              setModalVisibility(true)
+              return
+            }
+          } else if (invitee.isBringsPlusOne === null && !invitee.isPlusOne) {
+            setCurrentInvitee(InviteeType.AnonymusPlusOne)
+            setModalVisibility(true)
+            return
+          }
         }
       }
 
