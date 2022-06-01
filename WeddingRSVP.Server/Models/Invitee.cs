@@ -23,4 +23,5 @@ public class Invitee
     public Invitee SubmittingInvitee { get; set; }
     public bool? IsSimpleCount { get; set; }
     public int GroupCount { get; set; }
+    public bool SentRsvp { get; set; } 
 }
