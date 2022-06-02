@@ -23,7 +23,7 @@ export async function wait(ms: number) {
   await new Promise((resolve) => setTimeout(resolve, ms))
 }
 
-export function getOptions(allowNight: boolean, gender: string): Option[] {
+export function getOptions(allowNight: boolean | undefined, gender: string): Option[] {
   let options = [
     { value: ResponseType.Coming, text: i18n.t(`${gender}.options.arriving`) },
     { value: ResponseType.StayingTheNight, text: i18n.t(`${gender}.options.stayingTheNight`) },

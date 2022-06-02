@@ -17,9 +17,9 @@ export default function FlowerButton({ option, onClick, rotate = false }: Option
 
   const getFontSize = () => {
     const fontSize = width! / Math.max(...option.text.split(' ').map((s) => s.length))
-    if (fontSize > 33) return '30px'
-    if (fontSize < 24) return '20px'
-    if (option.text.split(' ').length >= 3 && fontSize * 6 >= width!) return '22px'
+    if (fontSize > 32) return '32px'
+    if (fontSize < 18) return '18px'
+    if (option.text.split(' ').length >= 3 && fontSize * 6 >= width!) return '20px'
     return `${fontSize}px`
   }
 

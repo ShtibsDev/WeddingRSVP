@@ -6,6 +6,10 @@
     "ellie": "Ellie"
   },
   "loading": "טוען...",
+  "finalMessage": {
+    "arrive": "תודה רבה {0}, נתראה בקרוב 🎉",
+    "noArrive": "תודה רבה {0} 🌸"
+  },
   "thanksForSelecting": "תודה שבחרת",
   "urlError": "הכתובת אליה ניסיתם לפנות שגויה",
   "inviteeNotFound": "המוזמן המבוקש לא נמצא",

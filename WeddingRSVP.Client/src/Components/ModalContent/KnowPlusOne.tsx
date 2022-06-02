@@ -36,7 +36,7 @@ export default function KnownPlusOne() {
   return (
     <>
       <h3 className='text-center'>{t('whatAboutPlusOne').format(plusOne.firstName)}</h3>
-      {getOptions(invitee.allowNight, plusOne.isMale ? 'm' : 'f').map((option) => (
+      {getOptions(invitee.group?.[0].allowNight, plusOne.isMale ? 'm' : 'f').map((option) => (
         <Col key={Number(option.value)} className='centered col-6'>
           <FlowerButton onClick={() => handleSelect(option)} option={option} rotate={false} />
         </Col>

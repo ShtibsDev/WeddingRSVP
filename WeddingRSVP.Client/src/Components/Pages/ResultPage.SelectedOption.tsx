@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { Col, Modal, Row } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import DisplayContext from '../../context/DisplayContext'
@@ -17,8 +17,25 @@ export default function SelectedOption() {
   const [showModal, setShowModal] = useState(false)
   const [isSubmitter, setIsSubmitter] = useState(true)
 
+  const ref = useRef<HTMLButtonElement>(null)
+  const [width, setWidth] = useState(ref.current?.clientWidth)
+
+  useEffect(() => setWidth(ref.current?.clientWidth), [ref.current])
+
   const canReset = new Date() < new Date('2022-06-10')
   const option = getOptions(invitee.allowNight, invitee.isMale ? 'm' : 'f').find((o) => o.value === invitee.response)
+
+  const getFontSize = () => {
+    const fontSize = width! / Math.max(...option!.text.split(' ').map((s) => s.length))
+    if (fontSize > 32) return '32px'
+    if (fontSize < 18) return '18px'
+    if (option!.text.split(' ').length >= 3 && fontSize * 6 >= width!) return '20px'
+    return `${fontSize}px`
+  }
+
+  const style = {
+    fontSize: getFontSize(),
+  }
 
   const yesNo: YesNoOption[] = [
     { value: true, text: t('yes') },
@@ -61,7 +78,7 @@ export default function SelectedOption() {
 
       {canReset && <h4>{t('canReset')}</h4>}
 
-      <button disabled={!canReset} onClick={() => setShowModal(true)} className='flower-button rotation m-0'>
+      <button ref={ref} style={style} disabled={!canReset} onClick={() => setShowModal(true)} className='flower-button rotation m-0'>
         {option?.text}
       </button>
 

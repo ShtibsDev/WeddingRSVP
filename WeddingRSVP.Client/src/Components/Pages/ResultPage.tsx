@@ -3,6 +3,7 @@ import InviteeContext from '../../context/InviteeContext'
 import { useContext, useEffect } from 'react'
 import AddEventBtn from '../Pages/ResultPage.AddEventBtn'
 import SelectedOption from './ResultPage.SelectedOption'
+import { ResponseType } from '../../models/Enums'
 
 export default function ResultPage() {
   const { t } = useTranslation()
@@ -10,8 +11,9 @@ export default function ResultPage() {
   const gender = invitee.isMale ? 'm' : 'f'
 
   const msg = (() => {
-    if (invitee.isArriving) return t(`${gender}.lookingToSeeYou`)
-    return t(`${gender}.FU`)
+    if (invitee.response === ResponseType.NotSure || invitee.response === ResponseType.NotComing)
+      return t(`finalMessage.noArrive`).format(invitee.firstName)
+    return t(`finalMessage.arrive`).format(invitee.firstName)
   })()
 
   return (
