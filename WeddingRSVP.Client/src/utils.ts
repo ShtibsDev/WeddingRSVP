@@ -61,3 +61,11 @@ export function getEvaluatedInvitee(inv: Invitee, option: Option) {
   }
   return inv
 }
+
+export function isIOS() {
+  return (
+    ['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod', 'MacIntel'].includes(navigator.platform) ||
+    (navigator.userAgent.includes('Mac') && 'ontouchend' in document)
+    // iPad on iOS 13 detection
+  )
+}
