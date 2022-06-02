@@ -20,19 +20,7 @@ export default function SingleForm({ className }: IProps) {
   const { setDisplay } = useContext(DisplayContext)
   const [currentInvitee, setCurrentInvitee] = useState<InviteeType>(InviteeType.MainInvitee)
   const [modalVisibility, setModalVisibility] = useState(false)
-  const [wasSubmited, setWasSubmited] = useState(false)
   const gender = invitee.isMale ? 'm' : 'f'
-
-  useEffect(() => {
-    goToResult()
-  }, [invitee, wasSubmited])
-
-  const goToResult = async () => {
-    if (wasSubmited) {
-      await wait(1000)
-      await setDisplay(DisplayType.ResultPage)
-    }
-  }
 
   const modalContent = () => {
     switch (currentInvitee) {
@@ -55,8 +43,6 @@ export default function SingleForm({ className }: IProps) {
     await wait(250)
 
     if (invitee.response !== ResponseType.None) {
-
-
       if (invitee.response !== ResponseType.NotSure && invitee.response !== ResponseType.NotComing) {
         if (invitee.isSimpleCount) {
           if (!invitee.groupCount) {
@@ -64,8 +50,7 @@ export default function SingleForm({ className }: IProps) {
             setModalVisibility(true)
             return
           }
-        }
-        else {
+        } else {
           if (invitee.group?.length) {
             if (invitee.group.some((m) => m.response === ResponseType.None)) {
               setCurrentInvitee(invitee.group.length === 1 ? InviteeType.KnownPlusOne : InviteeType.GroupMembers)
@@ -80,12 +65,11 @@ export default function SingleForm({ className }: IProps) {
         }
       }
 
-
       try {
-        setDisplay(DisplayType.Loading)
+        await setDisplay(DisplayType.Loading)
         const submitedData = await Api.submitInvitee(invitee)
-        setWasSubmited(true)
         setInvitee(submitedData)
+        setDisplay(DisplayType.ResultPage)
       } catch (error) {
         console.warn(error)
         setDisplay(DisplayType.GeneralError)

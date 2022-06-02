@@ -12,7 +12,6 @@ import ErrorPage from './Pages/ErrorPage'
 import DisplayContext from '../context/DisplayContext'
 import MainDisplay from './MainContent.MainDisplay'
 
-
 export default function MainContent() {
   const { t } = useTranslation()
   const [invitee, setInvitee] = useState(defaultInvitee)
@@ -39,9 +38,7 @@ export default function MainContent() {
           setInvitee(data)
           if (data.response === ResponseType.None) setDisplay(DisplayType.MainDisplay)
           else setDisplay(DisplayType.ResultPage)
-        }
-        else setDisplay(DisplayType.NotFound)
-
+        } else setDisplay(DisplayType.NotFound)
       } catch (error) {
         if (error === 204) setDisplay(DisplayType.NotFound)
         else setDisplay(DisplayType.GeneralError)
@@ -61,8 +58,7 @@ export default function MainContent() {
 
   const setDisplay = async (displayType: DisplayType, willWait = true) => {
     setFadeMode('fade-out')
-    if (willWait)
-      await wait(500)
+    if (willWait) await wait(500)
 
     switch (displayType) {
       case DisplayType.Loading:
@@ -86,8 +82,7 @@ export default function MainContent() {
     }
 
     setFadeMode('fade-in')
-    if (willWait)
-      await wait(500)
+    if (willWait) await wait(500)
   }
 
   return (
@@ -100,9 +95,7 @@ export default function MainContent() {
             </h1>
           </div>
         </header>
-        <main className={`main-content container ${fadeMode}`}>
-          {currentDisplay}
-        </main>
+        <main className={`main-content container ${fadeMode}`}>{currentDisplay}</main>
         <footer>
           <span style={{ fontStyle: 'italic' }}>Ofir Stiber</span> &copy; 2022
         </footer>
