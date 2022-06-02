@@ -14,7 +14,7 @@ export default function AddEventBtn() {
       return
     }
     const url =
-      'https://calendar.google.com/event?action=TEMPLATE&tmeid=XzZvczRjY2kzNmQxNDJiYTI2MHJrYWI5azY0cGpjYjlvOG9vamFiOXA2Z3MzZ2g5Zzg0czNhY2hqNm8gMTZtcnNoM2I3ZnRlYmc1dmZsMmxqcXNvNGdAZw&tmsrc=16mrsh3b7ftebg5vfl2ljqso4g%40group.calendar.google.com'
+      'https://calendar.google.com/event?action=TEMPLATE&tmeid=XzhvcjQ0ZGE2NzUwazRiOW82c3NrNGI5azc1MWs0YmEyNjBvMzBiOWg3MG80YWNpMzcwb2s0ZDFqNm8gOW1kbXM3cmUybjc1OGRsNTZjZGg4bGFzaDRAZw&tmsrc=9mdms7re2n758dl56cdh8lash4%40group.calendar.google.com'
     window.open(url, '_blank')!.focus()
   }
 
