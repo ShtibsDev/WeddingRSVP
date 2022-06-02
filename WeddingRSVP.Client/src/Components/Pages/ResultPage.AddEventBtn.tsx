@@ -4,7 +4,7 @@ import { isIOS } from '../../utils'
 export default function AddEventBtn() {
   const { t } = useTranslation()
   const handleClick = () => {
-    if (!isIOS()) {
+    if (isIOS()) {
       const link = document.createElement('a')
       const fileName = 'event.ics'
       link.href = `${location.origin}/${fileName}`
