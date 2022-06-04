@@ -48,7 +48,7 @@ public class InviteesController : ControllerBase
 
         try {
             var submitedData = await _inviteeService.SubmitRsvp(invitee);
-            _logger.Information("Request from  submited successfuly", $"{invitee.FirstName} {invitee.LastName}");
+            _logger.Information("Request from {InviteeName} submited successfuly", $"{invitee.FirstName} {invitee.LastName}");
             return Ok(submitedData);
         }
         catch (Exception ex) {
