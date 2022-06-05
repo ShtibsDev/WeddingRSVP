@@ -26,6 +26,7 @@
   "no": "לא",
   "and": "ו",
   "does": "האם",
+  "ok": "אישור",
   "areComing": "מגיעים",
   "whatAboutPlusOne": "ומה לגבי {0}?",
   "addToCalendar": "הוספה ללוח השנה",
@@ -33,6 +34,7 @@
   "yourSelection": "זה מה שבחרת",
   "canReset": "(באפשרותך ללחוץ על בחירתך על מנת לבחור מחדש)",
   "m": {
+    "selectDefault": "בחר",
     "areYouSure": "האם אתה בטוח שאתה רוצה לבחור מחדש?",
     "submittedForYou": "נראה ש{0} כבר ענה בשבילך",
     "payWithPaybox": "אם תרצה - תוכל לתת מתנה דרך Paybox",
@@ -50,6 +52,7 @@
     "lookingToSeeYou": "מצפים לראותך"
   },
   "f": {
+    "selectDefault": "בחרי",
     "areYouSure": "האם את בטוחה שאת רוצה לבחור מחדש?",
     "submittedForYou": "נראה ש{0} כבר ענתה בשבילך",
     "payWithPaybox": "אם תרצי - תוכלי לתת מתנה דרך Paybox",
