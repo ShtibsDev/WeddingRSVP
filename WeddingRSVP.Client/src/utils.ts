@@ -27,7 +27,7 @@ export function getOptions(allowNight: boolean | undefined, gender: string): Opt
   let options = [
     { value: ResponseType.Coming, text: i18n.t(`${gender}.options.arriving`) },
     { value: ResponseType.StayingTheNight, text: i18n.t(`${gender}.options.stayingTheNight`) },
-    { value: ResponseType.NotSure, text: i18n.t(`${gender}.options.notSure`) },
+    //{ value: ResponseType.NotSure, text: i18n.t(`${gender}.options.notSure`) },
     { value: ResponseType.NotComing, text: i18n.t(`${gender}.options.notComing`) },
   ]
 
