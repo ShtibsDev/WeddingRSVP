@@ -1,0 +1,71 @@
+{
+  "RSVPs": "החתונה של אלי ואופיר - אישור הגעה",
+  "hey": "היי",
+  "names": {
+    "ofir": "Ofir",
+    "ellie": "Ellie"
+  },
+  "loading": "טוען...",
+  "finalMessage": {
+    "arrive": "תודה רבה {0}, נתראה בקרוב 🎉",
+    "noArrive": "תודה רבה {0} 🌸"
+  },
+  "thanksForSelecting": "תודה שבחרת",
+  "urlError": "הכתובת אליה ניסיתם לפנות שגויה",
+  "inviteeNotFound": "המוזמן המבוקש לא נמצא",
+  "generalError": "ארעה שגיאה",
+  "contactDeveloper": "אנא פנו למפתחים אם הבעיה חוזרת",
+  "theyComeLikeYou": "האם {0} מגיעים גם כן?",
+  "describeGroup": "(במידה ולא ניתן לבחור באופן פרטני)",
+  "onFriday": "ביום שישי",
+  "invitationLink": "להזמנה לחתונה",
+  "iAm": "אני",
+  "finish": "סיום",
+  "onTime": "בשעה",
+  "yes": "כן",
+  "no": "לא",
+  "and": "ו",
+  "does": "האם",
+  "ok": "אישור",
+  "areComing": "מגיעים",
+  "whatAboutPlusOne": "ומה לגבי {0}?",
+  "addToCalendar": "הוספה ללוח השנה",
+  "linkToWaze": "קישור ל-Waze",
+  "yourSelection": "זה מה שבחרת",
+  "canReset": "(באפשרותך ללחוץ על בחירתך על מנת לבחור מחדש)",
+  "m": {
+    "selectDefault": "בחר",
+    "areYouSure": "האם אתה בטוח שאתה רוצה לבחור מחדש?",
+    "submittedForYou": "נראה ש{0} כבר ענה בשבילך",
+    "payWithPaybox": "אם תרצה - תוכל לתת מתנה דרך Paybox",
+    "select": "לחץ על מנת לבחור",
+    "weddingGettingClose": "החתונה שלנו מתקרבת ונשמח לדעת אם אתה מתכוון להגיע",
+    "canComeAgain": "אתה מוזמן לחזור ולענות במועד אחר",
+    "pleaseChoose": "תבחר בבקשה",
+    "bringPlusOne": "אתה מביא +1",
+    "options": {
+      "arriving": "מגיע",
+      "stayingTheNight": "מגיע ונשאר ללילה",
+      "notSure": "עוד לא יודע",
+      "notComing": "לא מגיע"
+    },
+    "lookingToSeeYou": "מצפים לראותך"
+  },
+  "f": {
+    "selectDefault": "בחרי",
+    "areYouSure": "האם את בטוחה שאת רוצה לבחור מחדש?",
+    "submittedForYou": "נראה ש{0} כבר ענתה בשבילך",
+    "payWithPaybox": "אם תרצי - תוכלי לתת מתנה דרך Paybox",
+    "select": "לחצי על מנת לבחור",
+    "weddingGettingClose": "החתונה שלנו מתקרבת ונשמח לדעת אם את מתכוונת להגיע",
+    "pleaseChoose": "תבחרי בבקשה",
+    "bringPlusOne": "את מביאה +1",
+    "options": {
+      "arriving": "מגיעה",
+      "stayingTheNight": "מגיעה ונשארת ללילה",
+      "notSure": "עוד לא יודעת",
+      "notComing": "לא מגיעה"
+    },
+    "lookingToSeeYou": "מצפים לראותך"
+  }
+}
