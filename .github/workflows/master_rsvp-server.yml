@@ -26,7 +26,7 @@ jobs:
         run: dotnet build WeddingRSVP.Server --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish WeddingRSVP.Server -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: App Settings Variable Substitution
         uses: microsoft/variable-substitution@v1
@@ -40,6 +40,7 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
+      
 
   deploy:
     runs-on: windows-latest
@@ -60,5 +61,5 @@ jobs:
         with:
           app-name: 'RSVP-Server'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B8DFEB23E1CA46048B265364701C7F1E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A4D2EE28245240BFAA242E450B3252B0 }}
           package: .
