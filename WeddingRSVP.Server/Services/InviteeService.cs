@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
+using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using WeddingRSVP.Server.Data.Services;
 using WeddingRSVP.Server.Exceptions;
@@ -13,6 +14,7 @@ public class InviteeService : IInviteeService
     public InviteeService(IOptions<DatabaseSettings> dbSettings, Serilog.ILogger looger)
     {
         _looger = looger;
+
 
         try {
             _looger.Verbose("Establishing connection to database.");
