@@ -6,7 +6,7 @@ name: Build and deploy ASP.Net Core app to Azure Web App - RSVP-Server
 on:
   push:
     branches:
-      - master
+      - Development
   workflow_dispatch:
 
 jobs:
