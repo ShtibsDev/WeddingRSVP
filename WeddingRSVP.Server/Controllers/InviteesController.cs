@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WeddingRSVP.Server.Data.Services;
-using WeddingRSVP.Server.Exceptions;
 
 namespace WeddingRSVP.Server.Controllers;
 

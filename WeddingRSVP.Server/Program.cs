@@ -1,11 +1,7 @@
-using MongoDB.Bson.Serialization.Conventions;
 using WeddingRSVP.Server.Data.Services;
 using WeddingRSVP.Server.Services;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
-
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 builder.Services.AddControllers();
@@ -24,6 +20,7 @@ try {
 
     var app = builder.Build();
     Log.Information("Application Environment: {env}", app.Environment.EnvironmentName);
+    Log.Information("Logging level: {env}", builder.Configuration.GetValue<string>("Serilog:MinimumLevel:Default"));
 
 
     if (app.Environment.IsDevelopment()) {

@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
-using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using WeddingRSVP.Server.Data.Services;
-using WeddingRSVP.Server.Exceptions;
 
 namespace WeddingRSVP.Server.Services;
 
@@ -108,6 +106,4 @@ public class InviteeService : IInviteeService
             Response = invitee.Response
         };
     }
-
-
 }
