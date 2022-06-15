@@ -7,9 +7,10 @@
   },
   "loading": "טוען...",
   "finalMessage": {
-    "arrive": "תודה רבה {0}, נתראה בקרוב 🎉",
+    "arrive": "תודה רבה {0} 🎉ֿ",
     "noArrive": "תודה רבה {0} 🌸"
   },
+  "timeAddress": "נתראה באולם White, ב-17.6 בשעה 12:30",
   "thanksForSelecting": "תודה שבחרת",
   "urlError": "הכתובת אליה ניסיתם לפנות שגויה",
   "inviteeNotFound": "המוזמן המבוקש לא נמצא",
