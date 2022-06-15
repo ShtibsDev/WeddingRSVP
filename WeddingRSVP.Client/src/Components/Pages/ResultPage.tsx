@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import InviteeContext from '../../context/InviteeContext'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import AddEventBtn from '../Pages/ResultPage.AddEventBtn'
 import SelectedOption from './ResultPage.SelectedOption'
 import { ResponseType } from '../../models/Enums'
@@ -18,7 +18,11 @@ export default function ResultPage() {
 
   return (
     <div className='result-page'>
-      <h2>{msg}</h2>
+      <h2>
+        {msg}
+        <br />
+        {t('timeAddress')}
+      </h2>
 
       <SelectedOption />
 
